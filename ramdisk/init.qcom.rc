@@ -1218,9 +1218,8 @@ on property:persist.sys.power_ctrl=0
 
 #start the compass servie
 service akmd09911 /system/bin/akmd09911
-    class main
-    seclabel u:r:sensor:s0
-    oneshot
+	class main
+	oneshot
 
 #TP related soft link added by ztemt 2014.12.09
 service tp_node /system/bin/sh /system/bin/tp_node.sh
