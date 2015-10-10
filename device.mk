@@ -18,11 +18,17 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 $(call inherit-product, vendor/nubia/nx511j/nx511j-vendor.mk)
 
-DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
+# Overlay
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG      := normal hdpi xhdpi xxhdpi
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+
+# Boot animation
+TARGET_SCREEN_HEIGHT      := 1920
+TARGET_SCREEN_WIDTH       := 1080
+TARGET_BOOTANIMATION_NAME := 1080
 
 # Recovery allowed devices
 TARGET_OTA_ASSERT_DEVICE := NX511J,Z9MINI,z9mini,nx511j
@@ -112,16 +118,6 @@ PRODUCT_COPY_FILES += \
 	  $(LOCAL_PATH)/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat
 
-# Wfd
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/capability.xml:system/etc/capability.xml \
-    $(LOCAL_PATH)/configs/wfdconfig.xml:system/etc/wfdconfig.xml \
-    $(LOCAL_PATH)/configs/wfdconfig640_480.xml:system/etc/wfdconfig640_480.xml \
-    $(LOCAL_PATH)/configs/wfdconfig800_480.xml:system/etc/wfdconfig800_480.xml \
-    $(LOCAL_PATH)/configs/wfdconfig960_540.xml:system/etc/wfdconfig960_540.xml \
-    $(LOCAL_PATH)/configs/wfdconfig1280_720.xml:system/etc/wfdconfig1280_720.xml \
-    $(LOCAL_PATH)/configs/wfdconfigsink.xml:system/etc/wfdconfigsink.xml
-
 # CRDA
 PRODUCT_PACKAGES += \
     crda \
@@ -163,9 +159,6 @@ PRODUCT_PACKAGES += \
     qcom.fmradio.xml
 
 PRODUCT_BOOT_JARS += qcom.fmradio
-
-# proprietary wifi display, if available
-#PRODUCT_BOOT_JARS += WfdCommon
 
 # GPS
 PRODUCT_PACKAGES += \
@@ -330,8 +323,7 @@ PRODUCT_PACKAGES += \
 # Qualcomm Random Numbers Generator
 PRODUCT_PACKAGES += \
     qrngd \
-    qrngp \
-    qrngtest
+    qrngp 
 
 PRODUCT_PACKAGES += \
     libemoji \
@@ -343,21 +335,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.sys.umsdirtyratio=20 \
 	persist.sys.usb.config=mtp,adb
 
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.com.google.clientidbase=android-zte \
-	ro.com.google.clientidbase.ms=android-zte \
-	ro.com.google.clientidbase.am=android-zte \
-	ro.com.google.clientidbase.gmm=android-zte \
-	ro.com.google.clientidbase.yt=android-zte
-
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.kernel.android.checkjni=0
+#PRODUCT_PROPERTY_OVERRIDES += \
+#	ro.kernel.android.checkjni=0
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.timezone=Asia/Shanghai \
     ro.product.locale.language=zh \
     ro.product.locale.region=CN 
+
+PRODUCT_DEFAULT_LANGUAGE := zh
+PRODUCT_DEFAULT_REGION   := CN
 
 # call dalvik heap config
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)

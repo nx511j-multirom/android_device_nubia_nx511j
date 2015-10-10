@@ -1,11 +1,11 @@
 #
-# Copyright 2014 The Android Open Source Project
+# Copyright (C) 2014 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,24 +25,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit from hardware-specific part of the product configuration
 $(call inherit-product, device/nubia/nx511j/device.mk)
 
-PRODUCT_DEVICE                := nx511j
-PRODUCT_NAME                  := full_nx511j
-PRODUCT_BRAND                 := nubia
-PRODUCT_MODEL                 := NX511J
-PRODUCT_MANUFACTURER          := nubia
-PRODUCT_RESTRICT_VENDOR_FILES := false
-
-# Boot animation
-TARGET_SCREEN_HEIGHT      := 1920
-TARGET_SCREEN_WIDTH       := 1080
-TARGET_BOOTANIMATION_NAME := 1080
-
-PRODUCT_DEFAULT_LANGUAGE := zh
-PRODUCT_DEFAULT_REGION   := CN
-
-# Set build fingerprint / ID / Product Name ect.
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_NAME=NX511J \
-    TARGET_DEVICE=NX511J \
-    PRODUCT_MODEL=NX511J
-
+# Device identifier. This must come after all inclusions
+PRODUCT_DEVICE := nx511j
+PRODUCT_NAME := full_nx511j
+PRODUCT_BRAND := nubia
+PRODUCT_MODEL := nx511j
+PRODUCT_MANUFACTURER := nubia
