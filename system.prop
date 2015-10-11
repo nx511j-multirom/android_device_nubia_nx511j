@@ -181,7 +181,7 @@ gsm.modem.restart_level=3
 gsm.modem.restart=0
 
 #set primary card enabled
-persist.radio.primarycard=true
+#persist.radio.primarycard=true
 
 #Two panels for Settings and Mms
 persist.sys.twopanel.enable=false
