@@ -829,7 +829,7 @@ lib64/librmnetctl.so
 bin/hal_proxy_daemon
 bin/xtwifi-client
 bin/xtwifi-inet-agent
-vendor/bin/slim_ap_daemon
+#vendor/bin/slim_ap_daemon
 etc/xtwifi.conf
 etc/xtra_root_cert.pem
 
