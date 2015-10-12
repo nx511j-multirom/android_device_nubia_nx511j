@@ -638,6 +638,16 @@ case "$target" in
                 echo 30 > /sys/devices/system/cpu/cpu5/sched_mostly_idle_load
                 echo 30 > /sys/devices/system/cpu/cpu6/sched_mostly_idle_load
                 echo 30 > /sys/devices/system/cpu/cpu7/sched_mostly_idle_load
+
+                # cpu idle nr run threshold
+                echo 3 > /sys/devices/system/cpu/cpu0/sched_mostly_idle_nr_run
+                echo 3 > /sys/devices/system/cpu/cpu1/sched_mostly_idle_nr_run
+                echo 3 > /sys/devices/system/cpu/cpu2/sched_mostly_idle_nr_run
+                echo 3 > /sys/devices/system/cpu/cpu3/sched_mostly_idle_nr_run
+                echo 3 > /sys/devices/system/cpu/cpu4/sched_mostly_idle_nr_run
+                echo 3 > /sys/devices/system/cpu/cpu5/sched_mostly_idle_nr_run
+                echo 3 > /sys/devices/system/cpu/cpu6/sched_mostly_idle_nr_run
+                echo 3 > /sys/devices/system/cpu/cpu7/sched_mostly_idle_nr_run
             ;;
         esac
     ;;
