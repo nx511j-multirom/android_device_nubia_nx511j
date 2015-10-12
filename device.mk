@@ -172,6 +172,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/quipc.conf:system/etc/quipc.conf \
     $(LOCAL_PATH)/configs/sap.conf:system/etc/sap.conf
 
+# Camera
+PRODUCT_PACKAGES += \
+    camera.msm8916
 
 # Media
 PRODUCT_COPY_FILES += \
