@@ -20,9 +20,9 @@ for FILE in `egrep -v '(^#|^$)' proprietary-files.txt`; do
         DEST=$FILE
       fi
       DIR=`dirname $DEST`
-      if [ ! -d $BASE/$DIR ]; then
-        mkdir -p $BASE/$DIR
-      fi
+      #if [ ! -d $BASE/$DIR ]; then
+      #  mkdir -p $BASE/$DIR
+      #fi
   if [ ! -d $OUT/$DIR ]; then
     mkdir -p $OUT/$DIR
   fi
