@@ -114,13 +114,7 @@ on boot
     mkdir /dev/socket/qmux_gps 0770 gps gps
     chmod 2770 /dev/socket/qmux_gps
 
-    #Create PERFD deamon related dirs
-    mkdir /data/misc/perfd 0755 root system
-    chmod 2755 /data/misc/perfd
-    mkdir /data/system/perfd 0770 root system
-    chmod 2770 /data/system/perfd
     setprop qcom.bt.dev_power_class "-p 1"
-
     setprop wifi.interface wlan0
 
 #   Define TCP buffer sizes for various networks
@@ -129,10 +123,6 @@ on boot
 
 
     setprop ro.telephony.call_ring.multiple false
-
-    #Set SUID bit for usbhub
-    chmod 4755 /system/bin/usbhub
-    chmod 755 /system/bin/usbhub_init
 
     #Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
@@ -255,6 +245,7 @@ on post-fs-data
 
     # Create directory used by display clients
     mkdir /data/misc/display 0770 system graphics
+    mkdir /persist/display 0770 system graphics
 
     # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
     # We chown/chmod /persist again so because mount is run as root + defaults
@@ -692,6 +683,9 @@ service ftmd /system/bin/logwrapper /system/bin/ftmdaemon -n
     oneshot
 
 on property:persist.service.ftmdaemon=1
+    start config_bluetooth
+
+on property:persist.service.ftmdaemon=1
     start ftmd
 
 on property:persist.service.ftmdaemon=0
@@ -1036,14 +1030,14 @@ service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emul
 service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 /mnt/media_rw/sdcard1 /storage/sdcard1
     class late_start
 
-service fuse_uicc0 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/uicc0 /storage/uicc0
-    class late_start
+#service fuse_uicc0 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/uicc0 /storage/uicc0
+#    class late_start
 
-service fuse_uicc1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/uicc1 /storage/uicc1
-    class late_start
-    disabled
+#service fuse_uicc1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/uicc1 /storage/uicc1
+#    class late_start
+#    disabled
 
-service fuse_usbotg /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbdisk /storage/usbdisk
+service fuse_usba /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usba /storage/usba
     class late_start
     disabled
 
@@ -1145,7 +1139,7 @@ on property:persist.sys.qlogd=0
     stop qlogd
 
 service bms-sh /system/bin/sh /init.qcom.bms.sh
-    class core
+    class main
     user root
     oneshot
 
@@ -1181,22 +1175,24 @@ service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqb
     group root
     disabled
 
-#enter factory test mode through dm added by ztemt 2014.12.09
+service wfdservice /system/bin/wfdservice
+    class main
+    user system
+    group graphics audio camera inet net_bt net_bt_admin net_bt_stack drmrpc bluetooth media_rw media
+    disabled
+    oneshot
+
+on property:sys.wfdservice=enable
+    start wfdservice
+
+on property:sys.wfdservice=disable
+    stop wfdservice
+
+#enter factory test mode through dm added by ztemt 2014.12.13
 service factory_code_set /system/bin/factory_code_exec
     class main
     disabled
     oneshot
-# enable the modem ssr before modem bring up.
-# it is used to avoid system crash when 4G simcard switch
-#on property:gsm.modem.restart_level=1
-#	write /sys/bus/msm_subsys/devices/subsys2/restart_level "SYSTEM"
-
-#on property:gsm.modem.restart_level=3
-#	write /sys/bus/msm_subsys/devices/subsys2/restart_level "RELATED"
-
-#ril reset modem add by zhanghao
-on property:gsm.modem.restart=1
-  write /sys/kernel/debug/msm_subsys/modem "restart"
 
 on property:sys.set.factory.code=*
 	start factory_code_set

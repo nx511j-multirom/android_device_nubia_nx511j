@@ -60,7 +60,7 @@ vendor/lib/libbtnv.so
 
 # Camera
 bin/mm-qcamera-daemon
-lib/hw/camera.msm8916.so
+lib/hw/camera.msm8916.so:lib/hw/camera.vendor.msm8916.so
 lib/libImageAlogrithm.so
 lib/libmmcamera_nubiacustpro.so
 lib/libmorpho_image_converter.so
@@ -422,6 +422,7 @@ vendor/lib64/libmmcamera_ov16825.so
 vendor/lib64/libmmcamera_ov7695.so
 vendor/lib64/libmmcamera_ov8858.so
 vendor/lib64/libmmcamera_ov8858_q8v19w.so
+vendor/lib64/libmmcamera_imx214.so
 
 # Camera firmware
 etc/firmware/cpp_firmware_v1_1_1.fw
@@ -454,39 +455,52 @@ vendor/lib/qcdrm/playready/lib/mediadrm/libprmediadrmplugin_customer.so
 vendor/lib/mediadrm/libwvdrmengine.so
 
 # GPS
-bin/location-mq
 bin/loc_launcher
-bin/quipc_igsn
+bin/location-mq
+bin/lowi-server
+bin/gpsone_daemon
 etc/permissions/com.qualcomm.location.xml
+-priv-app/com.qualcomm.location/com.qualcomm.location.apk
 -lib64/libloc_api_v02.so
 -lib64/libloc_ds_api.so
 -lib/libloc_api_v02.so
 -lib/libloc_ds_api.so
--priv-app/com.qualcomm.location/com.qualcomm.location.apk
-vendor/lib64/hw/flp.default.so
-vendor/lib64/libgeofence.so
-vendor/lib64/libizat_core.so
-vendor/lib64/liblbs_core.so
-vendor/lib64/liblocationservice.so
-vendor/lib64/liblowi_client.so
-vendor/lib64/libquipc_os_api.so
-vendor/lib64/libulp2.so
-vendor/lib64/libxtadapter.so
-vendor/lib64/libxtwifi_ulp_adaptor.so
-vendor/lib64/libxtwifi_zpp_adaptor.so
-vendor/lib64/libalarmservice_jni.so
+lib/hw/gps.default.so
+lib64/hw/gps.default.so
+lib/libgps.utils.so
+lib64/libgps.utils.so
+lib/libloc_core.so
+lib64/libloc_core.so
+lib/libloc_eng.so
+lib64/libloc_eng.so
 vendor/lib/hw/flp.default.so
+vendor/lib64/hw/flp.default.so
+vendor/lib/libalarmservice_jni.so
 vendor/lib/libgeofence.so
 vendor/lib/libizat_core.so
 vendor/lib/liblbs_core.so
 vendor/lib/liblocationservice.so
+vendor/lib/libloc_ext.so
 vendor/lib/liblowi_client.so
 vendor/lib/libquipc_os_api.so
 vendor/lib/libulp2.so
 vendor/lib/libxtadapter.so
 vendor/lib/libxtwifi_ulp_adaptor.so
 vendor/lib/libxtwifi_zpp_adaptor.so
-vendor/lib/libalarmservice_jni.so
+vendor/lib/libxt_native.so
+vendor/lib64/libalarmservice_jni.so
+vendor/lib64/libgeofence.so
+vendor/lib64/libizat_core.so
+vendor/lib64/liblbs_core.so
+vendor/lib64/liblocationservice.so
+vendor/lib64/libloc_ext.so
+vendor/lib64/liblowi_client.so
+vendor/lib64/libquipc_os_api.so
+vendor/lib64/libulp2.so
+vendor/lib64/libxtadapter.so
+vendor/lib64/libxtwifi_ulp_adaptor.so
+vendor/lib64/libxtwifi_zpp_adaptor.so
+vendor/lib64/libxt_native.so
 
 # Graphics
 vendor/lib64/egl/eglsubAndroid.so

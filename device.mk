@@ -169,7 +169,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/lowi.conf:system/etc/lowi.conf \
     $(LOCAL_PATH)/configs/quipc.conf:system/etc/quipc.conf
 
-
 # Camera
 PRODUCT_PACKAGES += \
     camera.msm8916
