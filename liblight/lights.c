@@ -219,16 +219,44 @@ set_breath_light_locked(int event_source,
         active_states |= event_source;
     } else {
         active_states &= ~event_source;
+        #if 0
         if(active_states == 0) {
             write_int(BREATH_RED_OUTN, 0); // just turn led off
             write_int(BREATH_RED_LED, 0); // just turn led off
             last_state = BREATH_SOURCE_NONE;
             return 0;
         }
+        #endif
+        if (event_source & BREATH_SOURCE_BUTTONS) {
+            ALOGE("[light.yirom] Button led off");
+            write_int(BREATH_RED_OUTN, 8);
+            write_str(BREATH_RED_FADE, "1 0 0");
+            write_str(BREATH_RED_LED, "2");
+
+            write_int(BREATH_RED_OUTN, 16);
+            write_str(BREATH_RED_FADE, "1 0 0");
+            write_str(BREATH_RED_LED, "2");
+
+            write_int(BREATH_RED_OUTN, 32);
+            write_str(BREATH_RED_FADE, "1 0 0");
+            write_str(BREATH_RED_LED, "2");
+        } else {
+            ALOGE("[light.yirom] Red led off");
+            write_int(BREATH_RED_OUTN, 0); // just turn led off
+            write_int(BREATH_RED_LED, 0); // just turn led off
+        }
+        if(active_states == 0) {
+            last_state = BREATH_SOURCE_NONE;
+            return 0; 
+        }
     }
 
-    if(last_state < event_source)
+#if 0    
+    if(last_state < event_source) {
+        ALOGE("[light.yirom] last_state <  event source, return.");
         return 0;
+    }
+#endif
 
     colorRGB = state->color;
     brightness = ((77 * ((colorRGB >> 16) & 0xFF)) +
@@ -277,10 +305,26 @@ set_breath_light_locked(int event_source,
     }
 
     //ALOGD("[lights.yirom] writing values: BREATH_RED_LED=%s\n", light_template);
+    if ((active_states & BREATH_SOURCE_BUTTONS) == 0) {
+        ALOGE("[light.yirom] Red led on");
+        write_int(BREATH_RED_OUTN, 16);
+        write_str(BREATH_RED_FADE, "4 5 0");
+        write_str(BREATH_RED_LED, light_template);
+    } 
+    if (active_states & BREATH_SOURCE_BUTTONS) {
+        ALOGE("[light.yirom] Button led on");
+        write_int(BREATH_RED_OUTN, 8);
+        write_str(BREATH_RED_FADE, "1 0 0");
+        write_str(BREATH_RED_LED, "1");
 
-    write_int(BREATH_RED_OUTN, 16);
-    write_str(BREATH_RED_LED, light_template);
+        write_int(BREATH_RED_OUTN, 16);
+        write_str(BREATH_RED_FADE, "1 0 0");
+        write_str(BREATH_RED_LED, "6");
 
+        write_int(BREATH_RED_OUTN, 32);
+        write_str(BREATH_RED_FADE, "1 0 0");
+        write_str(BREATH_RED_LED, "1");
+    }
     return 0;
 }
 
@@ -293,7 +337,6 @@ set_light_buttons(struct light_device_t* dev,
     pthread_mutex_lock(&g_lock);
     g_buttons = *state;
     set_breath_light_locked(BREATH_SOURCE_BUTTONS, &g_buttons);
-    //err = write_int(DEVICE_BUTTON_FILE, on ? 1 : 0);
     pthread_mutex_unlock(&g_lock);
     return err;
 }
@@ -395,6 +438,6 @@ struct hw_module_t HAL_MODULE_INFO_SYM = {
     .version_minor = 0,
     .id = LIGHTS_HARDWARE_MODULE_ID,
     .name = "lights Module for Nubia",
-    .author = "Y.I.R.O.M",
+    .author = "Parheliamm",
     .methods = &lights_module_methods,
 };
