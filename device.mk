@@ -165,9 +165,9 @@ PRODUCT_PACKAGES += \
     gps.msm8916
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/flp.conf:system/etc/flp.conf \
-    $(LOCAL_PATH)/configs/lowi.conf:system/etc/lowi.conf \
-    $(LOCAL_PATH)/configs/quipc.conf:system/etc/quipc.conf
+    $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf \
+    $(LOCAL_PATH)/gps/izat.conf:system/etc/izat.conf \
+    $(LOCAL_PATH)/gps/sap.conf:system/etc/sap.conf
 
 # Camera
 PRODUCT_PACKAGES += \
