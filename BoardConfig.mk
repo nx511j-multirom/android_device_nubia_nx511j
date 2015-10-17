@@ -19,6 +19,9 @@ LOCAL_PATH := device/nubia/nx511j
 
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
+PRODUCT_COPY_FILES := $(filter-out frameworks/base/data/keyboards/Generic.kl:system/usr/keylayout/Generic.kl \
+	, $(PRODUCT_COPY_FILES))
+
 # Platform
 TARGET_BOARD_PLATFORM := msm8916
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno405
