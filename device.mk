@@ -329,10 +329,13 @@ PRODUCT_PACKAGES += \
     libion
 
 PRODUCT_PROPERTY_OVERRIDES += \
-	wifi.interface=wlan0 \
-	wifi.supplicant_scan_interval=60 \
-	ro.sys.umsdirtyratio=20 \
-	persist.sys.usb.config=mtp,adb
+    ro.sf.lcd_density=480
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.interface=wlan0 \
+    wifi.supplicant_scan_interval=60 \
+    ro.sys.umsdirtyratio=20 \
+    persist.sys.usb.config=mtp,adb
 
 #PRODUCT_PROPERTY_OVERRIDES += \
 #	ro.kernel.android.checkjni=0
