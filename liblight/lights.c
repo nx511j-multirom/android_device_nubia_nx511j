@@ -29,6 +29,8 @@
 
 #include <hardware/lights.h>
 
+#define LOG_TAG "lightHAL"
+
 /******************************************************************************/
 
 #define BREATH_LED_BRIGHTNESS_NOTIFICATION  "3"
@@ -64,10 +66,10 @@ char const*const BREATH_RED_LED
         = "/sys/class/leds/red/brightness";
 
 char const*const BREATH_RED_OUTN
-        = "/sys/class/leds/red/outn";
+        = "/sys/class/leds/red/out";
 
 char const*const BREATH_RED_FADE
-        = "/sys/class/leds/red/fade_parameter";
+        = "/sys/class/leds/red/fade";
 
 char const*const BATTERY_CAPACITY
         = "/sys/class/power_supply/battery/capacity";
@@ -102,7 +104,7 @@ write_int(char const* path, int value)
         return amt == -1 ? -errno : 0;
     } else {
         if (already_warned == 0) {
-            ALOGE("[light.yirom]write_int failed to open %s\n", path);
+            ALOGE("write_int failed to open %s\n", path);
             already_warned = 1;
         }
         return -errno;
@@ -124,7 +126,7 @@ read_int(char const* path, int *value)
         return amt == -1 ? -errno : 0;
     } else {
         if (already_warned == 0) {
-            ALOGE("[light.yirom]read_int failed to open %s\n", path);
+            ALOGE("read_int failed to open %s\n", path);
             already_warned = 1;
         }
         return -errno;
@@ -146,7 +148,7 @@ read_str(char const* path, char *value)
         return amt == -1 ? -errno : 0;
     } else {
         if (already_warned == 0) {
-            ALOGE("[light.yirom]read_str failed to open %s\n", path);
+            ALOGE("read_str failed to open %s\n", path);
             already_warned = 1;
         }
         return -errno;
@@ -168,7 +170,7 @@ write_str(char const* path, char *value)
         return amt == -1 ? -errno : 0;
     } else {
         if (already_warned == 0) {
-            ALOGE("[light.yirom]write_str failed to open %s\n", path);
+            ALOGE("write_str failed to open %s\n", path);
             already_warned = 1;
         }
         return -errno;
@@ -197,7 +199,7 @@ set_light_backlight(struct light_device_t* dev,
     int brightness = rgb_to_brightness(state);
     pthread_mutex_lock(&g_lock);
     err = write_int(LCD_FILE, brightness);
-    //ALOGD("[light.yirom] lcd brightness=%d\n", brightness);
+    //ALOGD(" lcd brightness=%d\n", brightness);
     pthread_mutex_unlock(&g_lock);
     return err;
 }
@@ -228,7 +230,7 @@ set_breath_light_locked(int event_source,
         }
         #endif
         if (event_source & BREATH_SOURCE_BUTTONS) {
-            ALOGE("[light.yirom] Button led off");
+            ALOGE(" Button led off");
             write_int(BREATH_RED_OUTN, 8);
             write_str(BREATH_RED_FADE, "1 0 0");
             write_str(BREATH_RED_LED, "2");
@@ -241,7 +243,7 @@ set_breath_light_locked(int event_source,
             write_str(BREATH_RED_FADE, "1 0 0");
             write_str(BREATH_RED_LED, "2");
         } else {
-            ALOGE("[light.yirom] Red led off");
+            ALOGE(" Red led off");
             write_int(BREATH_RED_OUTN, 0); // just turn led off
             write_int(BREATH_RED_LED, 0); // just turn led off
         }
@@ -253,7 +255,7 @@ set_breath_light_locked(int event_source,
 
 #if 0    
     if(last_state < event_source) {
-        ALOGE("[light.yirom] last_state <  event source, return.");
+        ALOGE(" last_state <  event source, return.");
         return 0;
     }
 #endif
@@ -300,19 +302,18 @@ set_breath_light_locked(int event_source,
         last_state = BREATH_SOURCE_ATTENTION;
     } else {
         last_state = BREATH_SOURCE_NONE;
-        ALOGE("[light.yirom] Unknown state");
+        ALOGE(" Unknown state");
         return 0;
     }
 
-    //ALOGD("[lights.yirom] writing values: BREATH_RED_LED=%s\n", light_template);
     if ((active_states & BREATH_SOURCE_BUTTONS) == 0) {
-        ALOGE("[light.yirom] Red led on");
+        ALOGE(" Red led on");
         write_int(BREATH_RED_OUTN, 16);
         write_str(BREATH_RED_FADE, "4 5 0");
         write_str(BREATH_RED_LED, light_template);
     } 
     if (active_states & BREATH_SOURCE_BUTTONS) {
-        ALOGE("[light.yirom] Button led on");
+        ALOGE(" Button led on");
         write_int(BREATH_RED_OUTN, 8);
         write_str(BREATH_RED_FADE, "1 0 0");
         write_str(BREATH_RED_LED, "1");

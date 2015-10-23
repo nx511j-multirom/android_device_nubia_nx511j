@@ -201,6 +201,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/init.qcom.zram.sh:system/etc/init.qcom.zram.sh \
     $(LOCAL_PATH)/etc/qca6234-service.sh:system/etc/qca6234-service.sh
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/mem_shrinkd/memory_shrinkd.sh:system/etc/memory_shrinkd.sh
+
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
