@@ -191,6 +191,8 @@ TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 TW_DEFAULT_EXTERNAL_STORAGE := true
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 
+# RIL class
+BOARD_RIL_CLASS := ../../../device/nubia/nx511j/ril/
 
 # Ril
 #TARGET_RIL_VARIANT := caf
