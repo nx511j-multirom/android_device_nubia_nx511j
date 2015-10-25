@@ -52,3 +52,9 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/SHARED_LIBRARIES/libhardware_le
 $(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx511j/system/build.prop)
 $(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx511j/root/default.prop)
 $(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx511j/recovery/root/default.prop)
+$(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx511j/boot.img)
+$(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx511j/kernel)
+$(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx511j/dt.img)
+$(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx511j/*.zip)
+
+
