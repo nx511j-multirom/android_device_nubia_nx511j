@@ -660,6 +660,11 @@ case "$target" in
                 echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/sampling_down_factor
                 echo 499200 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
 
+                chown system:system /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
+                chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
+                chown system:system /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
+                chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
+
                 # enable thermal core_control now
 		echo 1 > /sys/module/msm_thermal/core_control/enabled
 
