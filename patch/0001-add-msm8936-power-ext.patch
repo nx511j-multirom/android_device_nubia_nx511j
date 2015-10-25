@@ -1,0 +1,109 @@
+From 007809b3372832864edbc1d2c751744733d553f1 Mon Sep 17 00:00:00 2001
+From: Chenxi Mao <chenxi.mao2013@gmail.com>
+Date: Sun, 25 Oct 2015 23:31:28 +0800
+Subject: [PATCH] add msm8936 power ext
+
+Change-Id: I19e2f274e852352925fd778f7f74e1377b75cebe
+---
+ power/Android.mk         |  7 +++++++
+ power/power-8916.c       |  2 +-
+ power/power_ext_nx511j.c | 52 ++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 60 insertions(+), 1 deletion(-)
+ create mode 100644 power/power_ext_nx511j.c
+
+diff --git a/power/Android.mk b/power/Android.mk
+index 5c727ad..0552f38 100644
+--- a/power/Android.mk
++++ b/power/Android.mk
+@@ -53,10 +53,17 @@ ifeq ($(call is-board-platform-in-list, msm8994), true)
+ LOCAL_SRC_FILES += power-8994.c
+ endif
+ 
++ifeq ($(TARGET_DEVICE),victara_retcn)
+ ifneq ($(TARGET_POWERHAL_SET_INTERACTIVE_EXT),)
+ LOCAL_CFLAGS += -DSET_INTERACTIVE_EXT
+ LOCAL_SRC_FILES += ../../../../$(TARGET_POWERHAL_SET_INTERACTIVE_EXT)
+ endif
++endif
++
++ifeq ($(TARGET_DEVICE),nx511j)
++LOCAL_CFLAGS += -DSET_INTERACTIVE_EXT
++LOCAL_SRC_FILES += power_ext_nx511j.c
++endif
+ 
+ ifneq ($(CM_POWERHAL_EXTENSION),)
+ LOCAL_MODULE := power.$(CM_POWERHAL_EXTENSION)
+diff --git a/power/power-8916.c b/power/power-8916.c
+index 7b1ad71..d58775f 100644
+--- a/power/power-8916.c
++++ b/power/power-8916.c
+@@ -49,7 +49,7 @@
+ #include "power-common.h"
+ 
+ #define MIN_FREQ_CPU0_DISP_OFF 400000
+-#define MIN_FREQ_CPU0_DISP_ON  960000
++#define MIN_FREQ_CPU0_DISP_ON  533333
+ 
+ char scaling_min_freq[4][80] ={
+     "sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq",
+diff --git a/power/power_ext_nx511j.c b/power/power_ext_nx511j.c
+new file mode 100644
+index 0000000..372b6ed
+--- /dev/null
++++ b/power/power_ext_nx511j.c
+@@ -0,0 +1,52 @@
++/*
++ * Copyright (c) 2015 The CyanogenMod Project
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++#include <errno.h>
++#include <string.h>
++#include <fcntl.h>
++
++#define LOG_TAG "PowerHAL_nx511j_Ext"
++#include <utils/Log.h>
++
++#define GO_HISPEED_LOAD_0 "/sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load"
++#define GO_HISPEED_LOAD_4 "/sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load"
++#define GO_HISPEED_LOAD_ON "85"
++#define GO_HISPEED_LOAD_OFF "99"
++
++static void sysfs_write(char *path, char *s) {
++    char buf[80];
++    int len;
++    int fd = open(path, O_WRONLY);
++
++    if (fd < 0) {
++        strerror_r(errno, buf, sizeof(buf));
++        ALOGE("Error opening %s: %s\n", path, buf);
++        return;
++    }
++
++    len = write(fd, s, strlen(s));
++    if (len < 0) {
++        strerror_r(errno, buf, sizeof(buf));
++        ALOGE("Error writing to %s: %s\n", path, buf);
++    }
++
++    close(fd);
++}
++
++void cm_power_set_interactive_ext(int on) {
++    sysfs_write(GO_HISPEED_LOAD_0, on ? GO_HISPEED_LOAD_ON : GO_HISPEED_LOAD_OFF);
++    sysfs_write(GO_HISPEED_LOAD_4, on ? GO_HISPEED_LOAD_ON : GO_HISPEED_LOAD_OFF);
++}
+-- 
+2.6.2
+
