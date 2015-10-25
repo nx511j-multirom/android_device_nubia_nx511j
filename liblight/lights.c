@@ -229,7 +229,7 @@ set_breath_light_locked(int event_source,
             return 0;
         }
         #endif
-        if (event_source & BREATH_SOURCE_BUTTONS) {
+        if (event_source) {
             ALOGE(" Button led off");
             write_int(BREATH_RED_OUTN, 8);
             write_str(BREATH_RED_FADE, "1 0 0");
@@ -253,7 +253,7 @@ set_breath_light_locked(int event_source,
         }
     }
 
-#if 0    
+#if 0
     if(last_state < event_source) {
         ALOGE(" last_state <  event source, return.");
         return 0;
