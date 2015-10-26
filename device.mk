@@ -335,6 +335,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=480
 
 PRODUCT_PROPERTY_OVERRIDES += \
+    verify
+
+PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=60 \
     ro.sys.umsdirtyratio=20 \

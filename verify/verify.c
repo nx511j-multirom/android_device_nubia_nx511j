@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
     if ((argc != 2) || (argv[1] == NULL) )
         return -1;
     else
-        src_version = arg[1];
+        src_version = argv[1];
 
     fp = fopen("BUILD_PROP_PATH", "r");
     if (fp == NULL) {
@@ -49,7 +49,8 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    while (fgets(buffer, PAGE_SIZE, fp) != EOF) {
+    while (feof(fp) == 0) {
+        fgets(buffer, PAGE_SIZE, fp);
         if (strstr(buffer, src_version))
             goto match;
     }
