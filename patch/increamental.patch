@@ -1,0 +1,36 @@
+diff --git a/tools/releasetools/edify_generator.py b/tools/releasetools/edify_generator.py
+index 80cf7ce..c52c71a 100644
+--- a/tools/releasetools/edify_generator.py
++++ b/tools/releasetools/edify_generator.py
+@@ -81,16 +81,26 @@ class EdifyGenerator(object):
+            ) % (name, value, name, value)
+     self.script.append(cmd)
+ 
++#  def AssertSomeFingerprint(self, *fp):
++#    """Assert that the current recovery build fingerprint is one of *fp."""
++#    if not fp:
++#      raise ValueError("must specify some fingerprints")
++#    cmd = (
++#           ' ||\n    '.join([('getprop("ro.build.fingerprint") == "%s"')
++#                        % i for i in fp]) +
++#           ' ||\n    abort("Package expects build fingerprint of %s; this '
++#           'device has " + getprop("ro.build.fingerprint") + ".");'
++#           ) % (" or ".join(fp),)
++#    self.script.append(cmd)
++
+   def AssertSomeFingerprint(self, *fp):
+     """Assert that the current recovery build fingerprint is one of *fp."""
+     if not fp:
+       raise ValueError("must specify some fingerprints")
++    source = fp[0]
+     cmd = (
+-           ' ||\n    '.join([('getprop("ro.build.fingerprint") == "%s"')
+-                        % i for i in fp]) +
+-           ' ||\n    abort("Package expects build fingerprint of %s; this '
+-           'device has " + getprop("ro.build.fingerprint") + ".");'
+-           ) % (" or ".join(fp),)
++           'ifelse(run_program("/system/bin/verifier", "%s") == 0, ui_print("Versions match..."), (unmount("/system");abort("Versions mismatch...")));'
++           ) % (source)
+     self.script.append(cmd)
+ 
+   def AssertSomeThumbprint(self, *fp):
