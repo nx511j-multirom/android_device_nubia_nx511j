@@ -170,7 +170,7 @@ TARGET_HAVE_SIGNED_VENUS_FW := true
 include device/qcom/sepolicy/sepolicy.mk
 
 # Recovery
-#TARGET_RECOVERY_FSTAB := device/nubia/nx511j/ramdisk/fstab.qcom
+TARGET_RECOVERY_FSTAB := device/nubia/nx511j/ramdisk/fstab.qcom
 DEVICE_RESOLUTION := 1080x1920
 TARGET_RECOVERY_PIXEL_FORMAT := ABGR_8888
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
@@ -178,7 +178,7 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
 #twrp
-TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/twrp/twrp.fstab
+#TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/twrp/twrp.fstab
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_SDCARD_ON_DATA := true
 TW_TARGET_USES_QCOM_BSP := true

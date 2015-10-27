@@ -43,9 +43,10 @@ int main(int argc, char *argv[])
     else
         src_version = argv[1];
 
-    fp = fopen("BUILD_PROP_PATH", "r");
+    fp = fopen(BUILD_PROP_PATH, "r");
     if (fp == NULL) {
         ALOGE("cannot open %s", BUILD_PROP_PATH);
+        //printf("cannot open %s\n", BUILD_PROP_PATH);
         return -1;
     }
 
@@ -56,8 +57,10 @@ int main(int argc, char *argv[])
     }
     fclose(fp);
     /*not match*/
+    //printf("Not match\n");
     return -1;
 match:
+    //printf("Match\n");
     fclose(fp);
     return 0;
 }

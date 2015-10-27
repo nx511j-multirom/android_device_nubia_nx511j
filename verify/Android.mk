@@ -29,6 +29,13 @@ LOCAL_MODULE := verify
 
 LOCAL_MODULE_TAGS := optional
 
+LOCAL_FORCE_STATIC_EXECUTABLE := true
+
+LOCAL_STATIC_LIBRARIES := \
+	libcutils \
+	liblog \
+	libc 
+
 include $(BUILD_EXECUTABLE)
 
 endif
