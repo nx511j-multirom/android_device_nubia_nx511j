@@ -1,3 +1,86 @@
+diff --git a/tools/releasetools/common.py b/tools/releasetools/common.py
+index 499e8c2..0650228 100755
+--- a/tools/releasetools/common.py
++++ b/tools/releasetools/common.py
+@@ -1258,77 +1258,4 @@ def ParseCertificate(data):
+ 
+ def MakeRecoveryPatch(input_dir, output_sink, recovery_img, boot_img,
+                       info_dict=None):
+-  """Generate a binary patch that creates the recovery image starting
+-  with the boot image.  (Most of the space in these images is just the
+-  kernel, which is identical for the two, so the resulting patch
+-  should be efficient.)  Add it to the output zip, along with a shell
+-  script that is run from init.rc on first boot to actually do the
+-  patching and install the new recovery image.
+-
+-  recovery_img and boot_img should be File objects for the
+-  corresponding images.  info should be the dictionary returned by
+-  common.LoadInfoDict() on the input target_files.
+-  """
+-
+-  if info_dict is None:
+-    info_dict = OPTIONS.info_dict
+-
+-  diff_program = ["imgdiff"]
+-  path = os.path.join(input_dir, "SYSTEM", "etc", "recovery-resource.dat")
+-  if os.path.exists(path):
+-    diff_program.append("-b")
+-    diff_program.append(path)
+-    bonus_args = "-b /system/etc/recovery-resource.dat"
+-  else:
+-    bonus_args = ""
+-
+-  d = Difference(recovery_img, boot_img, diff_program=diff_program)
+-  _, _, patch = d.ComputePatch()
+-  output_sink("recovery-from-boot.p", patch)
+-
+-  td_pair = GetTypeAndDevice("/boot", info_dict)
+-  if not td_pair:
+-    return
+-  boot_type, boot_device = td_pair
+-  td_pair = GetTypeAndDevice("/recovery", info_dict)
+-  if not td_pair:
+-    return
+-  recovery_type, recovery_device = td_pair
+-
+-  sh = """#!/system/bin/sh
+-if [ -f /system/etc/recovery-transform.sh ]; then
+-  exec sh /system/etc/recovery-transform.sh %(recovery_size)d %(recovery_sha1)s %(boot_size)d %(boot_sha1)s
+-fi
+-
+-if ! applypatch -c %(recovery_type)s:%(recovery_device)s:%(recovery_size)d:%(recovery_sha1)s; then
+-  applypatch %(bonus_args)s %(boot_type)s:%(boot_device)s:%(boot_size)d:%(boot_sha1)s %(recovery_type)s:%(recovery_device)s %(recovery_sha1)s %(recovery_size)d %(boot_sha1)s:/system/recovery-from-boot.p && log -t recovery "Installing new recovery image: succeeded" || log -t recovery "Installing new recovery image: failed"
+-else
+-  log -t recovery "Recovery image already installed"
+-fi
+-""" % { 'boot_size': boot_img.size,
+-        'boot_sha1': boot_img.sha1,
+-        'recovery_size': recovery_img.size,
+-        'recovery_sha1': recovery_img.sha1,
+-        'boot_type': boot_type,
+-        'boot_device': boot_device,
+-        'recovery_type': recovery_type,
+-        'recovery_device': recovery_device,
+-        'bonus_args': bonus_args,
+-        }
+-
+-  # The install script location moved from /system/etc to /system/bin
+-  # in the L release.  Parse the init.rc file to find out where the
+-  # target-files expects it to be, and put it there.
+-  sh_location = "etc/install-recovery.sh"
+-  try:
+-    with open(os.path.join(input_dir, "BOOT", "RAMDISK", "init.rc")) as f:
+-      for line in f:
+-        m = re.match("^service flash_recovery /system/(\S+)\s*$", line)
+-        if m:
+-          sh_location = m.group(1)
+-          print "putting script in", sh_location
+-          break
+-  except (OSError, IOError), e:
+-    print "failed to read init.rc: %s" % (e,)
+-
+-  output_sink(sh_location, sh)
++  return 
 diff --git a/tools/releasetools/edify_generator.py b/tools/releasetools/edify_generator.py
 index 80cf7ce..88c62155d 100644
 --- a/tools/releasetools/edify_generator.py
