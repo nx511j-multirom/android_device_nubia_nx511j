@@ -199,7 +199,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/init.qcom.uicc.sh:system/etc/init.qcom.uicc.sh \
     $(LOCAL_PATH)/etc/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh \
     $(LOCAL_PATH)/etc/init.qcom.zram.sh:system/etc/init.qcom.zram.sh \
-    $(LOCAL_PATH)/etc/qca6234-service.sh:system/etc/qca6234-service.sh
+    $(LOCAL_PATH)/etc/qca6234-service.sh:system/etc/qca6234-service.sh \
+    $(LOCAL_PATH)/etc/tp_node.sh:system/bin/tp_node.sh
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/mem_shrinkd/memory_shrinkd.sh:system/etc/memory_shrinkd.sh
@@ -353,6 +354,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_DEFAULT_LANGUAGE := zh
 PRODUCT_DEFAULT_REGION   := CN
+
+# KeyHandler
+PRODUCT_PACKAGES += \
+    com.cyanogenmod.keyhandler
+
+PRODUCT_SYSTEM_SERVER_JARS += com.cyanogenmod.keyhandler
+# never dexopt the keyhandler
+$(call add-product-dex-preopt-module-config,com.cyanogenmod.keyhandler,disable)
 
 # call dalvik heap config
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)

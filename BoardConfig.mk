@@ -194,6 +194,9 @@ TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 # RIL class
 BOARD_RIL_CLASS := ../../../device/nubia/nx511j/ril/
 
+#d2tw
+BOARD_HARDWARE_CLASS := device/nubia/nx511j/cmhw/
+
 # Ril
 #TARGET_RIL_VARIANT := caf
 #SIM_COUNT := 2
