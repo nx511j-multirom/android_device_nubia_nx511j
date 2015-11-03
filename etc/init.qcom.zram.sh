@@ -42,3 +42,9 @@ if [ $IsLowMemory -eq 1 ]; then
     echo 512 > /sys/module/process_reclaim/parameters/per_swap_size
     echo 30 > /sys/module/process_reclaim/parameters/swap_opt_eff
 fi
+
+    echo 1 > /sys/module/process_reclaim/parameters/enable_process_reclaim
+    echo 50 > /sys/module/process_reclaim/parameters/pressure_min
+    echo 70 > /sys/module/process_reclaim/parameters/pressure_max
+    echo 512 > /sys/module/process_reclaim/parameters/per_swap_size
+    echo 30 > /sys/module/process_reclaim/parameters/swap_opt_eff
