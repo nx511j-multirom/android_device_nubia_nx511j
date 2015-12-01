@@ -23,7 +23,7 @@
 #include <fcntl.h>
 #include <pthread.h>
 #include <math.h>
-
+#include <stdlib.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
 
