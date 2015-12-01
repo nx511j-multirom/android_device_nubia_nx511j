@@ -139,7 +139,13 @@ PRODUCT_PACKAGES += \
 
 # RIL
 PRODUCT_PACKAGES += \
-    libxml2
+    libcurl \
+    libxml2 \
+    libcnefeatureconfig
+
+# SSL Compat
+PRODUCT_PACKAGES += \
+    libboringssl-compat
 
 # GPS configuration
 PRODUCT_COPY_FILES += \
