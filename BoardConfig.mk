@@ -121,6 +121,7 @@ BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 BOARD_USES_ALSA_AUDIO                      := true
 AUDIO_FEATURE_ENABLED_FM                   := true
 AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
+USE_CUSTOM_AUDIO_POLICY := 1
 
 # QCOM enhanced A/V
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
