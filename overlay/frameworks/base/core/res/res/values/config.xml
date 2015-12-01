@@ -59,7 +59,7 @@
     <bool name="config_unplugTurnsOnScreen">true</bool>
 
     <!-- Boolean indicating whether Softap requires reloading AP firmware -->
-    <bool name="config_wifiApFirmwareReload">false</bool>
+    <!-- <bool name="config_wifiApFirmwareReload">false</bool> -->
 
     <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
     <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
@@ -352,9 +352,9 @@
          turn the screen on
          NOTE ! - Enable for devices that have a fast response proximity sensor
     -->
-    <bool name="config_proximityCheckOnWake">true</bool>
+    <!-- <bool name="config_proximityCheckOnWake">true</bool> -->
 
-    <integer name="config_proximityCheckTimeout">400</integer>
+    <!-- <integer name="config_proximityCheckTimeout">400</integer> -->
 
     <!-- Indicate whether the SD card is accessible without removing the battery. -->
     <bool name="config_batterySdCardAccessibility">true</bool>
@@ -374,8 +374,10 @@
     <string name="config_fusedLocationProviderPackageName" translatable="false">com.qualcomm.location</string>
 
     <!-- Performance profiles -->
+    <!--
     <string name="config_perf_profile_prop">powerhal</string>
     <string name="config_perf_profile_default_entry">1</string>
+    -->
 
     <!-- The list absolute paths of jar/apk files containing the device specific handlers,
          delimited by File.pathSeparator, which defaults to ":" on Android -->
