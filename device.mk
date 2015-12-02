@@ -73,6 +73,7 @@ PRODUCT_PACKAGES += \
     libdivxdrmdecrypt \
     libOmxAacEnc \
     libOmxAmrEnc \
+    libextmedia_jni \
     libOmxCore \
     libOmxEvrcEnc \
     libOmxQcelp13Enc \
@@ -161,14 +162,14 @@ PRODUCT_PACKAGES += \
     services-ext
 
 # FM radio
-PRODUCT_PACKAGES += \
-    FM2 \
-    FMRecord \
-    libqcomfm_jni \
-    qcom.fmradio \
-    qcom.fmradio.xml
+#PRODUCT_PACKAGES += \
+#    FM2 \
+#    FMRecord \
+#    libqcomfm_jni \
+#    qcom.fmradio \
+#    qcom.fmradio.xml
 
-PRODUCT_BOOT_JARS += qcom.fmradio
+#PRODUCT_BOOT_JARS += qcom.fmradio
 
 # GPS
 PRODUCT_PACKAGES += \

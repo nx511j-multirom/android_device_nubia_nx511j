@@ -119,8 +119,8 @@ BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 
 # Audio
 BOARD_USES_ALSA_AUDIO                      := true
-AUDIO_FEATURE_ENABLED_FM                   := true
-AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
+#AUDIO_FEATURE_ENABLED_FM                   := true
+#AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
 USE_CUSTOM_AUDIO_POLICY := 1
 
 # QCOM enhanced A/V
@@ -154,7 +154,10 @@ TARGET_GPS_HAL_PATH := $(LOCAL_PATH)/gps
 TARGET_PROVIDES_LIBLIGHT := true
 
 # QCRIL
-#TARGET_RIL_VARIANT := caf
+TARGET_RIL_VARIANT := caf
+SIM_COUNT := 2
+TARGET_GLOBAL_CFLAGS += -DANDROID_MULTI_SIM
+TARGET_GLOBAL_CPPFLAGS += -DANDROID_MULTI_SIM
 
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true
@@ -194,7 +197,7 @@ TW_DEFAULT_EXTERNAL_STORAGE := true
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 
 # RIL class
-BOARD_RIL_CLASS := ../../../device/nubia/nx511j/ril/
+#BOARD_RIL_CLASS := ../../../device/nubia/nx511j/ril/
 
 #d2tw
 BOARD_HARDWARE_CLASS := device/nubia/nx511j/cmhw/

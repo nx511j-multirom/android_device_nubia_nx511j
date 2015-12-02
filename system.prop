@@ -224,7 +224,8 @@ ro.pip.gated=0
 
 sys.io.scheduler=bfq
 
-ro.telephony.ril_class=NubiaUiccRIL
+#ro.telephony.ril_class=NubiaUiccRIL
+ro.telephony.ril.config=simactivation
 
 persist.sys.isUsbOtgEnabled=true
 
