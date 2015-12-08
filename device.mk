@@ -171,6 +171,11 @@ PRODUCT_PACKAGES += \
 
 #PRODUCT_BOOT_JARS += qcom.fmradio
 
+# FM
+PRODUCT_PACKAGES += \
+    FMRadio \
+    libfmjni
+
 # GPS
 PRODUCT_PACKAGES += \
     gps.msm8916
