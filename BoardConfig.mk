@@ -110,6 +110,7 @@ TARGET_CONTINUOUS_SPLASH_ENABLED := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_ION := true
 USE_OPENGL_RENDERER := true
+BOARD_USES_OPENSSL_SYMBOLS := true
 
 #Enable HW based full disk encryption
 TARGET_HW_DISK_ENCRYPTION := true
@@ -119,8 +120,8 @@ BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 
 # Audio
 BOARD_USES_ALSA_AUDIO                      := true
-#AUDIO_FEATURE_ENABLED_FM                   := true
-#AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
+AUDIO_FEATURE_ENABLED_FM                   := true
+AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
 USE_CUSTOM_AUDIO_POLICY := 1
 
 # QCOM enhanced A/V
