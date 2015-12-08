@@ -187,7 +187,8 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    camera.msm8916
+    camera.msm8916 \
+    libcamera_symbol     
 
 # Media
 PRODUCT_COPY_FILES += \

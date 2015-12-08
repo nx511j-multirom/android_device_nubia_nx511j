@@ -16,3 +16,16 @@ LOCAL_MODULE_RELATIVE_PATH    := hw
 LOCAL_MULTILIB := 32
 include $(BUILD_SHARED_LIBRARY)
 #include $(BUILD_HEAPTRACKED_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+
+LOCAL_SHARED_LIBRARIES := liblog libcutils libgui libbinder libutils
+
+LOCAL_SRC_FILES := \
+    camera_symbol.c
+
+LOCAL_MODULE := libcamera_symbol
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+
+LOCAL_32_BIT_ONLY := $(BOARD_QTI_CAMERA_32BIT_ONLY)
+include $(BUILD_SHARED_LIBRARY)
