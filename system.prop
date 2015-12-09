@@ -60,9 +60,6 @@ media.aac_51_output_enabled=true
 # system prop for custom hls enhancements
 persist.media.hls.enhancements=false
 
-#codecs:DivxHD Divx FLAC QCP MP2TS 3G2 DTS AVI ASF AC3 AAC
-mm.enable.qcom_parser=3314291
-
 # Default to AwesomePlayer
 media.stagefright.use-awesome=false
 

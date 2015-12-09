@@ -570,26 +570,26 @@ etc/firmware/venus.b03
 etc/firmware/venus.b04
 etc/firmware/venus.mbn
 etc/firmware/venus.mdt
-vendor/lib64/libDivxDrm.so
-vendor/lib64/libExtendedExtractor.so
+#vendor/lib64/libDivxDrm.so
+#vendor/lib64/libExtendedExtractor.so
 vendor/lib64/libmm-hdcpmgr.so
-vendor/lib64/libmmosal.so
-vendor/lib64/libmmparser.so
+#vendor/lib64/libmmosal.so
+#vendor/lib64/libmmparser.so
 vendor/lib64/libOmxAacDec.so
 vendor/lib64/libOmxMux.so
-vendor/lib64/libSHIMDivxDrm.so
+#vendor/lib64/libSHIMDivxDrm.so
 vendor/lib64/libHevcSwDecoder.so
-vendor/lib/libDivxDrm.so
-vendor/lib/libExtendedExtractor.so
+#vendor/lib/libDivxDrm.so
+#vendor/lib/libExtendedExtractor.so
 vendor/lib/libI420colorconvert.so
 vendor/lib/libmm-hdcpmgr.so
-vendor/lib/libmmosal.so
-vendor/lib/libmmparser.so
+#vendor/lib/libmmosal.so
+#vendor/lib/libmmparser.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxEvrcDec.so
 vendor/lib/libOmxQcelp13Dec.so
 vendor/lib/libOmxMux.so
-vendor/lib/libSHIMDivxDrm.so
+#vendor/lib/libSHIMDivxDrm.so
 -vendor/lib/libHevcSwDecoder.so
 
 # Display tuning
