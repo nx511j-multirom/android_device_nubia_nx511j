@@ -35,16 +35,27 @@ on early-init
 
 on init
     setprop persist.powermo.disfeature " "
-    
+
     # Set permissions for persist partition
     mkdir /persist 0771 system system
+    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+    mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
+    mkdir /mnt/media_rw/uicc0 0700 media_rw media_rw
+    mkdir /mnt/media_rw/uicc1 0700 media_rw media_rw
+    mkdir /storage/sdcard1 0700 root root
+    mkdir /storage/uicc0 0700 root root
+    mkdir /storage/uicc1 0700 root root
+    mkdir /storage/usbotg 0700 root root
+
+    export EXTERNAL_STORAGE /sdcard
+    export SECONDARY_STORAGE /storage/sdcard1
 
     #export LD_PRELOAD "libboringssl-compat.so"
-    export LD_SHIM_LIBS "/system/lib/libcrypto.so|libboringssl-compat.so:/system/vendor/lib/libmmcamera2_sensor_modules.so|libzte_camera.so:/system/vendor/lib/libmmcamera2_stats_modules.so|libzte_camera.so:/system/lib64/libcrypto.so|libboringssl-compat.so:/system/vendor/lib64/egl/libEGL_adreno.so|libboringssl-compat.so"
+    export LD_SHIM_LIBS "/system/lib/libcrypto.so|libboringssl-compat.so:/system/vendor/lib/libmmcamera2_sensor_modules.so|libcamera_symbol.so:/system/vendor/lib/libmmcamera2_stats_modules.so|libcamera_symbol.so:/system/lib64/libcrypto.so|libboringssl-compat.so:/system/vendor/lib64/egl/libEGL_adreno.so|libboringssl-compat.so"
 
     # Support legacy paths
     symlink /sdcard /mnt/sdcard
-    symlink /sdcard /storage/sdcard0    
+    symlink /sdcard /storage/sdcard0
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -55,6 +66,8 @@ on early-boot
     write /sys/module/pil_msa/parameters/modem_auth_timeout_ms ${persist.sys.modem_auth_timeout}
     write /sys/module/peripheral_loader/parameters/proxy_timeout_ms ${persist.sys.pil_proxy_timeout}
     write /sys/kernel/boot_adsp/boot 1
+    chown root audio /sys/kernel/boot_adsp/boot
+    exec u:r:qti_init_shell:s0 -- /init.qcom.early_boot.sh
 
 on boot
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
@@ -91,6 +104,12 @@ on boot
     chmod 2770 /dev/socket/qmux_bluetooth
     mkdir /dev/socket/qmux_gps 0770 gps gps
     chmod 2770 /dev/socket/qmux_gps
+
+    mkdir /persist/drm 0770 system system
+    mkdir /persist/misc 0770 system system
+
+    #Create NETMGR daemon socket area
+    mkdir /dev/socket/netmgr 0750 radio radio
 
     setprop qcom.bt.dev_power_class "-p 1"
     setprop wifi.interface wlan0
