@@ -21,6 +21,8 @@ DEVICE_PROVISIONED=1
 ro.telephony.default_network=22,22
 ro.telephony.default_cdma_sub=0
 #persist.radio.primarycard=true
+persist.data.qmi.adb_logmask=0
+ro.telephony.ril.config=simactivation
 
 debug.sf.hw=0
 debug.egl.hw=0
@@ -222,7 +224,7 @@ ro.pip.gated=0
 sys.io.scheduler=bfq
 
 #ro.telephony.ril_class=NubiaUiccRIL
-ro.telephony.ril.config=simactivation
+
 
 persist.sys.isUsbOtgEnabled=true
 
