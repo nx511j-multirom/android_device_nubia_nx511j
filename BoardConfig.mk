@@ -113,7 +113,7 @@ USE_OPENGL_RENDERER := true
 BOARD_USES_OPENSSL_SYMBOLS := true
 
 #Enable HW based full disk encryption
-TARGET_HW_DISK_ENCRYPTION := true
+TARGET_HW_DISK_ENCRYPTION := false
 
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
@@ -206,4 +206,5 @@ TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 #BOARD_RIL_CLASS := ../../../device/nubia/nx511j/ril/
 
 #d2tw
-BOARD_HARDWARE_CLASS := device/nubia/nx511j/cmhw/
+BOARD_HARDWARE_CLASS := hardware/cyanogen/cmhw
+TARGET_TAP_TO_WAKE_NODE := "/data/tp/easy_wakeup_gesture"
