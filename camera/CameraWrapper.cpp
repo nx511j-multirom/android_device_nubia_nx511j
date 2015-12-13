@@ -149,6 +149,16 @@ static char *camera_fixup_setparams(int id, const char *settings)
     params.set(android::CameraParameters::KEY_VIDEO_STABILIZATION, "false");
 #endif
 
+    if (params.get(android::CameraParameters::KEY_SCENE_MODE)) {
+        const char *sceneMode = params.get(android::CameraParameters::KEY_SCENE_MODE);
+        if (strcmp(sceneMode, "hdr") == 0) {
+            ALOGE("%s: Workaround: Set to Auto Mode", __FUNCTION__);
+            params.set(android::CameraParameters::KEY_SCENE_MODE, android::CameraParameters::SCENE_MODE_AUTO);
+        } else {
+           /*do nothing.*/
+        }
+    }
+
 #if !LOG_NDEBUG
     ALOGV("%s: fixed parameters:", __FUNCTION__);
     params.dump();
