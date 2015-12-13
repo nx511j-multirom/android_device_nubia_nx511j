@@ -51,7 +51,7 @@ on init
     export SECONDARY_STORAGE /storage/sdcard1
 
     #export LD_PRELOAD "libboringssl-compat.so"
-    export LD_SHIM_LIBS "/system/lib/libcrypto.so|libboringssl-compat.so:/system/vendor/lib/libmmcamera2_sensor_modules.so|libcamera_symbol.so:/system/vendor/lib/libmmcamera2_stats_modules.so|libcamera_symbol.so:/system/lib64/libcrypto.so|libboringssl-compat.so:/system/vendor/lib64/egl/libEGL_adreno.so|libboringssl-compat.so"
+    export LD_SHIM_LIBS "/system/lib/libcrypto.so|libboringssl-compat.so:/system/vendor/lib/libmmcamera2_sensor_modules.so|libcamera_symbol.so:/system/vendor/lib/libmmcamera2_stats_modules.so|libcamera_symbol.so:/system/lib64/libcrypto.so|libboringssl-compat.so:/system/vendor/lib64/egl/libEGL_adreno.so|libboringssl-compat.so:/system/bin/mm-qcamera-daemon|libcamera_symbol.so"
 
     # Support legacy paths
     symlink /sdcard /mnt/sdcard
