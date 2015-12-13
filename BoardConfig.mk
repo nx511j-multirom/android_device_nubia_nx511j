@@ -110,7 +110,7 @@ TARGET_CONTINUOUS_SPLASH_ENABLED := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_ION := true
 USE_OPENGL_RENDERER := true
-BOARD_USES_OPENSSL_SYMBOLS := true
+#BOARD_USES_OPENSSL_SYMBOLS := true
 
 #Enable HW based full disk encryption
 TARGET_HW_DISK_ENCRYPTION := false
@@ -203,7 +203,7 @@ TW_DEFAULT_EXTERNAL_STORAGE := true
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 
 # RIL class
-#BOARD_RIL_CLASS := ../../../device/nubia/nx511j/ril/
+BOARD_RIL_CLASS := ../../../device/nubia/nx511j/ril/
 
 #d2tw
 BOARD_HARDWARE_CLASS := hardware/cyanogen/cmhw
@@ -212,3 +212,5 @@ TARGET_TAP_TO_WAKE_NODE := "/data/tp/easy_wakeup_gesture"
 # Radio
 ADD_RADIO_FILES := true
 TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
+
+TARGET_CUSTOM_DTBTOOL := dtbToolNubia
