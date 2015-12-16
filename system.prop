@@ -229,4 +229,7 @@ ro.telephony.ril_class=NubiaUiccRIL
 
 persist.sys.isUsbOtgEnabled=true
 
+# Maintainer
+ro.mk.maintainer=parhelia
+
 
