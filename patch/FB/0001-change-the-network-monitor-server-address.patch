@@ -1,0 +1,26 @@
+From 5982efd43624bc75ea004ffa057a3c5c0df89f8c Mon Sep 17 00:00:00 2001
+From: Chenxi Mao <chenxi.mao2013@gmail.com>
+Date: Sun, 20 Dec 2015 07:58:38 +0800
+Subject: [PATCH] change the network monitor server address
+
+Change-Id: I15973eefc82ca7aaeca450a0a2df9934f60cff0b
+---
+ services/core/java/com/android/server/connectivity/NetworkMonitor.java | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/services/core/java/com/android/server/connectivity/NetworkMonitor.java b/services/core/java/com/android/server/connectivity/NetworkMonitor.java
+index 5108564..a3542d2 100644
+--- a/services/core/java/com/android/server/connectivity/NetworkMonitor.java
++++ b/services/core/java/com/android/server/connectivity/NetworkMonitor.java
+@@ -77,7 +77,7 @@ import java.util.Random;
+ public class NetworkMonitor extends StateMachine {
+     private static final boolean DBG = true;
+     private static final String TAG = "NetworkMonitor";
+-    private static final String DEFAULT_SERVER = "connectivitycheck.gstatic.com";
++    private static final String DEFAULT_SERVER = "g.cn";
+     private static final int SOCKET_TIMEOUT_MS = 10000;
+     public static final String ACTION_NETWORK_CONDITIONS_MEASURED =
+             "android.net.conn.NETWORK_CONDITIONS_MEASURED";
+-- 
+2.6.4
+

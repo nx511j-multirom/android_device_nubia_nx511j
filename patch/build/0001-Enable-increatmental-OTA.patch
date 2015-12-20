@@ -1,0 +1,167 @@
+From 3cf25402604af1c855eab76c8c5b91616865977f Mon Sep 17 00:00:00 2001
+From: Chenxi Mao <chenxi.mao2013@gmail.com>
+Date: Sun, 20 Dec 2015 07:57:28 +0800
+Subject: [PATCH] Enable increatmental OTA
+
+Change-Id: I6772823d768b5f10eed76364116c30485d5881d3
+---
+ core/Makefile                         | 10 ++---
+ core/tasks/dt_image.mk                |  3 +-
+ tools/releasetools/common.py          | 73 +----------------------------------
+ tools/releasetools/edify_generator.py | 20 +++++++---
+ 4 files changed, 22 insertions(+), 84 deletions(-)
+
+diff --git a/core/Makefile b/core/Makefile
+index 7eca2db..83078c7 100644
+--- a/core/Makefile
++++ b/core/Makefile
+@@ -1092,11 +1092,11 @@ endif
+ 	$(call generate-userimage-prop-dictionary, $(ota_temp_root)/META/misc_info.txt)
+ 	$(hide) cp -r $(PRODUCT_OUT)/boot.img $(ota_temp_root)/BOOTABLE_IMAGES/
+ 	$(hide) cp -r $(PRODUCT_OUT)/recovery.img $(ota_temp_root)/BOOTABLE_IMAGES/
+-	$(hide) ./build/tools/releasetools/make_recovery_patch $(ota_temp_root) $(ota_temp_root)
+-	$(hide) rm -f $(TARGET_OUT)/bin/install-recovery.sh
+-	$(hide) rm -f $(TARGET_OUT)/recovery-from-boot.p
+-	$(hide) cp $(ota_temp_root)/SYSTEM/bin/install-recovery.sh $(TARGET_OUT)/bin/install-recovery.sh
+-	$(hide) cp $(ota_temp_root)/SYSTEM/recovery-from-boot.p $(TARGET_OUT)/recovery-from-boot.p
++	#$(hide) ./build/tools/releasetools/make_recovery_patch $(ota_temp_root) $(ota_temp_root)
++	#$(hide) rm -f $(TARGET_OUT)/bin/install-recovery.sh
++	#$(hide) rm -f $(TARGET_OUT)/recovery-from-boot.p
++	#$(hide) cp $(ota_temp_root)/SYSTEM/bin/install-recovery.sh $(TARGET_OUT)/bin/install-recovery.sh
++	#$(hide) cp $(ota_temp_root)/SYSTEM/recovery-from-boot.p $(TARGET_OUT)/recovery-from-boot.p
+ 
+ $(RECOVERY_RESOURCE_ZIP): $(INSTALLED_RECOVERYIMAGE_TARGET)
+ 	$(hide) mkdir -p $(dir $@)
+diff --git a/core/tasks/dt_image.mk b/core/tasks/dt_image.mk
+index ca7e87f..86c36fb 100644
+--- a/core/tasks/dt_image.mk
++++ b/core/tasks/dt_image.mk
+@@ -18,8 +18,7 @@ DTBTOOL := $(HOST_OUT_EXECUTABLES)/$(DTBTOOL_NAME)$(HOST_EXECUTABLE_SUFFIX)
+ 
+ INSTALLED_DTIMAGE_TARGET := $(PRODUCT_OUT)/dt.img
+ 
+-# Most specific paths must come first in possible_dtb_dirs
+-possible_dtb_dirs = $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/
++possible_dtb_dirs = $(KERNEL_OUT)/arch/$(TARGET_KERNEL_ARCH)/boot/dts/ $(KERNEL_OUT)/arch/arm/boot/
+ dtb_dir = $(firstword $(wildcard $(possible_dtb_dirs)))
+ 
+ define build-dtimage-target
+diff --git a/tools/releasetools/common.py b/tools/releasetools/common.py
+index 47cf759..034d77c 100644
+--- a/tools/releasetools/common.py
++++ b/tools/releasetools/common.py
+@@ -1415,75 +1415,4 @@ def ParseCertificate(data):
+ 
+ def MakeRecoveryPatch(input_dir, output_sink, recovery_img, boot_img,
+                       info_dict=None):
+-  """Generate a binary patch that creates the recovery image starting
+-  with the boot image.  (Most of the space in these images is just the
+-  kernel, which is identical for the two, so the resulting patch
+-  should be efficient.)  Add it to the output zip, along with a shell
+-  script that is run from init.rc on first boot to actually do the
+-  patching and install the new recovery image.
+-
+-  recovery_img and boot_img should be File objects for the
+-  corresponding images.  info should be the dictionary returned by
+-  common.LoadInfoDict() on the input target_files.
+-  """
+-
+-  if info_dict is None:
+-    info_dict = OPTIONS.info_dict
+-
+-  diff_program = ["imgdiff"]
+-  path = os.path.join(input_dir, "SYSTEM", "etc", "recovery-resource.dat")
+-  if os.path.exists(path):
+-    diff_program.append("-b")
+-    diff_program.append(path)
+-    bonus_args = "-b /system/etc/recovery-resource.dat"
+-  else:
+-    bonus_args = ""
+-
+-  d = Difference(recovery_img, boot_img, diff_program=diff_program)
+-  _, _, patch = d.ComputePatch()
+-  output_sink("recovery-from-boot.p", patch)
+-
+-  try:
+-    # The following GetTypeAndDevice()s need to use the path in the target
+-    # info_dict instead of source_info_dict.
+-    boot_type, boot_device = GetTypeAndDevice("/boot", info_dict)
+-    recovery_type, recovery_device = GetTypeAndDevice("/recovery", info_dict)
+-  except KeyError:
+-    return
+-
+-  sh = """#!/system/bin/sh
+-if [ -f /system/etc/recovery-transform.sh ]; then
+-  exec sh /system/etc/recovery-transform.sh %(recovery_size)d %(recovery_sha1)s %(boot_size)d %(boot_sha1)s
+-fi
+-
+-if ! applypatch -c %(recovery_type)s:%(recovery_device)s:%(recovery_size)d:%(recovery_sha1)s; then
+-  applypatch %(bonus_args)s %(boot_type)s:%(boot_device)s:%(boot_size)d:%(boot_sha1)s %(recovery_type)s:%(recovery_device)s %(recovery_sha1)s %(recovery_size)d %(boot_sha1)s:/system/recovery-from-boot.p && log -t recovery "Installing new recovery image: succeeded" || log -t recovery "Installing new recovery image: failed"
+-else
+-  log -t recovery "Recovery image already installed"
+-fi
+-""" % {'boot_size': boot_img.size,
+-       'boot_sha1': boot_img.sha1,
+-       'recovery_size': recovery_img.size,
+-       'recovery_sha1': recovery_img.sha1,
+-       'boot_type': boot_type,
+-       'boot_device': boot_device,
+-       'recovery_type': recovery_type,
+-       'recovery_device': recovery_device,
+-       'bonus_args': bonus_args}
+-
+-  # The install script location moved from /system/etc to /system/bin
+-  # in the L release.  Parse the init.rc file to find out where the
+-  # target-files expects it to be, and put it there.
+-  sh_location = "etc/install-recovery.sh"
+-  try:
+-    with open(os.path.join(input_dir, "BOOT", "RAMDISK", "init.rc")) as f:
+-      for line in f:
+-        m = re.match(r"^service flash_recovery /system/(\S+)\s*$", line)
+-        if m:
+-          sh_location = m.group(1)
+-          print "putting script in", sh_location
+-          break
+-  except (OSError, IOError) as e:
+-    print "failed to read init.rc: %s" % (e,)
+-
+-  output_sink(sh_location, sh)
++  return
+diff --git a/tools/releasetools/edify_generator.py b/tools/releasetools/edify_generator.py
+index e3425bf..5445a0c 100644
+--- a/tools/releasetools/edify_generator.py
++++ b/tools/releasetools/edify_generator.py
+@@ -84,15 +84,25 @@ class EdifyGenerator(object):
+                name=name, value=value)
+     self.script.append(cmd)
+ 
++#  def AssertSomeFingerprint(self, *fp):
++#    """Assert that the current recovery build fingerprint is one of *fp."""
++#    if not fp:
++#      raise ValueError("must specify some fingerprints")
++#    cmd = (' ||\n    '.join([('getprop("ro.build.fingerprint") == "%s"') % i
++#                             for i in fp]) +
++#           ' ||\n    abort("Package expects build fingerprint of %s; this '
++#           'device has " + getprop("ro.build.fingerprint") + ".");') % (
++#               " or ".join(fp))
++#    self.script.append(cmd)
++
+   def AssertSomeFingerprint(self, *fp):
+     """Assert that the current recovery build fingerprint is one of *fp."""
+     if not fp:
+       raise ValueError("must specify some fingerprints")
+-    cmd = (' ||\n    '.join([('getprop("ro.build.fingerprint") == "%s"') % i
+-                             for i in fp]) +
+-           ' ||\n    abort("Package expects build fingerprint of %s; this '
+-           'device has " + getprop("ro.build.fingerprint") + ".");') % (
+-               " or ".join(fp))
++    source = fp[0]
++    cmd = (
++           'ifelse(run_program("/system/bin/verify", "%s") == 0, ui_print("Versions match..."), (unmount("/system");abort("Versions mismatch...")));'
++           ) % (source)
+     self.script.append(cmd)
+ 
+   def AssertSomeThumbprint(self, *fp):
+-- 
+2.6.4
+
