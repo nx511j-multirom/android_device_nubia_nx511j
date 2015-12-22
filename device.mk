@@ -356,8 +356,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=60 \
-    ro.sys.umsdirtyratio=20 \
-    persist.sys.usb.config=mtp,adb
+    ro.sys.umsdirtyratio=20
 
 #PRODUCT_PROPERTY_OVERRIDES += \
 #	ro.kernel.android.checkjni=0
