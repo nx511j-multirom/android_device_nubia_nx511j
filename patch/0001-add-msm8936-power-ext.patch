@@ -1,9 +1,9 @@
-From 007809b3372832864edbc1d2c751744733d553f1 Mon Sep 17 00:00:00 2001
-From: Chenxi Mao <chenxi.mao2013@gmail.com>
-Date: Sun, 25 Oct 2015 23:31:28 +0800
+From cbf3112c3b5bbb442188a523beaff0659f19cf01 Mon Sep 17 00:00:00 2001
+From: Chenxi Mao <chenxi.mao@sonymobile.com>
+Date: Fri, 18 Dec 2015 13:42:00 +0800
 Subject: [PATCH] add msm8936 power ext
 
-Change-Id: I19e2f274e852352925fd778f7f74e1377b75cebe
+Change-Id: Id144f071457ddfb9284284e4a866888da80026aa
 ---
  power/Android.mk         |  7 +++++++
  power/power-8916.c       |  2 +-
@@ -12,7 +12,7 @@ Change-Id: I19e2f274e852352925fd778f7f74e1377b75cebe
  create mode 100644 power/power_ext_nx511j.c
 
 diff --git a/power/Android.mk b/power/Android.mk
-index 5c727ad..0552f38 100644
+index 718004e..92a71e8 100644
 --- a/power/Android.mk
 +++ b/power/Android.mk
 @@ -53,10 +53,17 @@ ifeq ($(call is-board-platform-in-list, msm8994), true)
@@ -31,10 +31,10 @@ index 5c727ad..0552f38 100644
 +LOCAL_SRC_FILES += power_ext_nx511j.c
 +endif
  
- ifneq ($(CM_POWERHAL_EXTENSION),)
- LOCAL_MODULE := power.$(CM_POWERHAL_EXTENSION)
+ ifneq ($(TARGET_TAP_TO_WAKE_NODE),)
+   LOCAL_CFLAGS += -DTAP_TO_WAKE_NODE=\"$(TARGET_TAP_TO_WAKE_NODE)\"
 diff --git a/power/power-8916.c b/power/power-8916.c
-index 7b1ad71..d58775f 100644
+index 6add9d0..205c367 100644
 --- a/power/power-8916.c
 +++ b/power/power-8916.c
 @@ -49,7 +49,7 @@
@@ -42,7 +42,7 @@ index 7b1ad71..d58775f 100644
  
  #define MIN_FREQ_CPU0_DISP_OFF 400000
 -#define MIN_FREQ_CPU0_DISP_ON  960000
-+#define MIN_FREQ_CPU0_DISP_ON  533333
++#define MIN_FREQ_CPU0_DISP_ON  800000
  
  char scaling_min_freq[4][80] ={
      "sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq",
@@ -105,5 +105,5 @@ index 0000000..372b6ed
 +    sysfs_write(GO_HISPEED_LOAD_4, on ? GO_HISPEED_LOAD_ON : GO_HISPEED_LOAD_OFF);
 +}
 -- 
-2.6.2
+2.4.2
 
