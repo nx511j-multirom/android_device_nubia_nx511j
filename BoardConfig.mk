@@ -125,7 +125,7 @@ BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 # Audio
 BOARD_USES_ALSA_AUDIO                      := true
 AUDIO_FEATURE_ENABLED_FM                   := true
-#AUDIO_FEATURE_ENABLED_FLUENCE              := true
+AUDIO_FEATURE_ENABLED_FLUENCE              := true
 #AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
 #USE_CUSTOM_AUDIO_POLICY := 1
 
@@ -206,6 +206,8 @@ TW_EXTERNAL_STORAGE_PATH := "/external_sd"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 TW_DEFAULT_EXTERNAL_STORAGE := true
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
+
+BOARD_CANT_BUILD_RECOVERY_FROM_BOOT_PATCH := true
 
 # RIL class
 BOARD_RIL_CLASS := ../../../device/nubia/nx511j/ril/

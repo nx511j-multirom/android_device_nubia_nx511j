@@ -1187,8 +1187,9 @@ service mem_shrinkd /system/bin/sh /system/etc/memory_shrinkd.sh
 
 #start the compass servie
 service akmd09911 /system/bin/akmd09911
-	class main
-	oneshot
+    class main
+    oneshot
+    writepid /dev/cpuset/system-background/tasks
 
 #TP related soft link added by ztemt 2014.12.09
 service tp_node /system/bin/sh /system/bin/tp_node.sh
