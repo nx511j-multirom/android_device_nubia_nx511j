@@ -459,8 +459,8 @@ bin/loc_launcher
 bin/location-mq
 bin/lowi-server
 bin/gpsone_daemon
-etc/permissions/com.qualcomm.location.xml
--priv-app/com.qualcomm.location/com.qualcomm.location.apk
+#etc/permissions/com.qualcomm.location.xml
+#-priv-app/com.qualcomm.location/com.qualcomm.location.apk
 -lib64/libloc_api_v02.so
 -lib64/libloc_ds_api.so
 -lib/libloc_api_v02.so
@@ -692,26 +692,26 @@ vendor/lib64/lib-imsvt.so
 vendor/lib64/lib-imsxml.so
 
 # Radio
--app/qcrilmsgtunnel/qcrilmsgtunnel.apk
--app/shutdownlistener/shutdownlistener.apk
+#-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
+#-app/shutdownlistener/shutdownlistener.apk
 bin/netmgrd
 bin/qmuxd
 bin/radish
 bin/rfs_access
 bin/rmt_storage
-bin/rild
+#bin/rild
 etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
--framework/qcnvitems.jar
--framework/qcrilhook.jar
+#-framework/qcnvitems.jar
+#-framework/qcrilhook.jar
 lib/librmnetctl.so
 lib/libreference-ril.so
-lib/libril.so
-lib/librilutils.so
+#lib/libril.so
+#lib/librilutils.so
 lib64/librmnetctl.so
 lib64/libreference-ril.so
-lib64/libril.so
-lib64/librilutils.so
+#lib64/libril.so
+#lib64/librilutils.so
 vendor/lib64/libcneapiclient.so
 vendor/lib64/libconfigdb.so
 vendor/lib64/libmdmdetect.so
@@ -742,7 +742,7 @@ vendor/lib64/libthermalclient.so
 vendor/lib64/libthermalioctl.so
 
 # Time services
--app/TimeService/TimeService.apk
+#-app/TimeService/TimeService.apk
 bin/time_daemon
 -vendor/lib64/libtime_genoff.so
 -vendor/lib/libtime_genoff.so
