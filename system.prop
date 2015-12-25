@@ -127,8 +127,6 @@ audio.offload.gapless.enabled=true
 voice.playback.conc.disabled=true
 voice.record.conc.disabled=true
 voice.voip.conc.disabled=true
-#Set composition for USB
-persist.sys.usb.config=diag,modem,mass_storage,adb
 
 #Set read only default composition for USB
 ro.sys.usb.default.config=nubia
@@ -226,10 +224,5 @@ sys.io.scheduler=bfq
 
 ro.telephony.ril_class=NubiaUiccRIL
 
-
-persist.sys.isUsbOtgEnabled=true
-
 # Maintainer
 ro.mk.maintainer=parhelia
-
-

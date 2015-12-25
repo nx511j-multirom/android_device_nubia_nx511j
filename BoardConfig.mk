@@ -46,6 +46,10 @@ TARGET_2ND_CPU_VARIANT := cortex-a53
 TARGET_BOARD_SUFFIX := _64
 TARGET_USES_64_BIT_BINDER := true
 
+#
+ENABLE_CPUSETS     := true
+#ENABLE_SCHED_BOOST := true
+
 # Kernel
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
@@ -121,7 +125,7 @@ BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 # Audio
 BOARD_USES_ALSA_AUDIO                      := true
 AUDIO_FEATURE_ENABLED_FM                   := true
-#AUDIO_FEATURE_ENABLED_FLUENCE              := true
+AUDIO_FEATURE_ENABLED_FLUENCE              := true
 #AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
 #USE_CUSTOM_AUDIO_POLICY := 1
 
@@ -202,6 +206,8 @@ TW_EXTERNAL_STORAGE_PATH := "/external_sd"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 TW_DEFAULT_EXTERNAL_STORAGE := true
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
+
+BOARD_CANT_BUILD_RECOVERY_FROM_BOOT_PATCH := true
 
 # RIL class
 BOARD_RIL_CLASS := ../../../device/nubia/nx511j/ril/
