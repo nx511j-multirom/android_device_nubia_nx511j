@@ -219,5 +219,3 @@ TARGET_TAP_TO_WAKE_NODE := "/data/tp/easy_wakeup_gesture"
 # Radio
 ADD_RADIO_FILES := true
 TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
-
-TARGET_CUSTOM_DTBTOOL := dtbToolNubia
