@@ -4,6 +4,10 @@
     "target_path": "vendor/nubia/nx511j"
   },
   {
+    "repository": "android_kernel_nubia_nx511j",
+    "target_path": "kernel/nubia/nx511j"
+  },
+  {
     "repository": "android_external_stlport",
     "target_path": "external/stlport"
   },
