@@ -213,7 +213,7 @@ BOARD_CANT_BUILD_RECOVERY_FROM_BOOT_PATCH := true
 BOARD_RIL_CLASS := ../../../device/nubia/nx511j/ril/
 
 #d2tw
-BOARD_HARDWARE_CLASS := hardware/cyanogen/cmhw
+BOARD_HARDWARE_CLASS := hardware/mokee/mkhw
 TARGET_TAP_TO_WAKE_NODE := "/data/tp/easy_wakeup_gesture"
 
 # Radio
