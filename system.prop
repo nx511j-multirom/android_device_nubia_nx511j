@@ -23,6 +23,7 @@ ro.telephony.default_cdma_sub=0
 #persist.radio.primarycard=true
 persist.data.qmi.adb_logmask=0
 ro.telephony.ril.config=simactivation
+ro.ril.multi_rat_capable=true
 
 debug.sf.hw=0
 debug.egl.hw=0
