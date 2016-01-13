@@ -156,6 +156,7 @@ PRODUCT_COPY_FILES += \
 
 # Connectivity Engine support
 PRODUCT_PACKAGES += \
+    librmnetctl \
     libcnefeatureconfig \
     services-ext
 
