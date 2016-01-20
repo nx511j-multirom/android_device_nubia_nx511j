@@ -495,7 +495,6 @@ on property:persist.sys.ssr.enable_ramdumps=0
 
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
-    start mem_shrinkd
 
 on property:persist.radio.atfwd.start=false
     stop atfwd
@@ -1169,13 +1168,6 @@ on property:persist.sys.power_ctrl=1
     start power_engine
 on property:persist.sys.power_ctrl=0
     stop power_engine
-
-service mem_shrinkd /system/bin/sh /system/etc/memory_shrinkd.sh
-    class late_start
-    user root
-    disabled
-    oneshot
-
 
 #start the compass servie
 service akmd09911 /system/bin/akmd09911

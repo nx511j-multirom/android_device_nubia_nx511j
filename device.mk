@@ -160,16 +160,6 @@ PRODUCT_PACKAGES += \
     libcnefeatureconfig \
     services-ext
 
-# FM radio
-#PRODUCT_PACKAGES += \
-#    FM2 \
-#    FMRecord \
-#    libqcomfm_jni \
-#    qcom.fmradio \
-#    qcom.fmradio.xml
-
-#PRODUCT_BOOT_JARS += qcom.fmradio
-
 # FM
 PRODUCT_PACKAGES += \
     FMRadio \
@@ -217,9 +207,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/init.qcom.zram.sh:system/etc/init.qcom.zram.sh \
     $(LOCAL_PATH)/etc/qca6234-service.sh:system/etc/qca6234-service.sh \
     $(LOCAL_PATH)/etc/tp_node.sh:system/bin/tp_node.sh
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/mem_shrinkd/memory_shrinkd.sh:system/etc/memory_shrinkd.sh
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -324,8 +311,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Stk
 
-PRODUCT_TAGS += dalvik.gc.type-precise
-
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
@@ -358,17 +343,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=60 \
     ro.sys.umsdirtyratio=20
-
-#PRODUCT_PROPERTY_OVERRIDES += \
-#	ro.kernel.android.checkjni=0
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.timezone=Asia/Shanghai \
-    ro.product.locale.language=zh \
-    ro.product.locale.region=CN 
-
-PRODUCT_DEFAULT_LANGUAGE := zh
-PRODUCT_DEFAULT_REGION   := CN
 
 # call dalvik heap config
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)

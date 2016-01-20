@@ -269,7 +269,7 @@
     <bool name="config_hotswapCapable">true</bool>
 
     <!-- Our modem doesn't support this query yet -->
-    <string name="config_radio_access_family">GPRS|EDGE|UMTS|IS95A|IS95B|1XRTT|EVDO_0|EVDO_A|HSDPA|HSUPA|HSPA|EVDO_B|EHRPD|LTE|HSPAP|GSM|TD_SCDMA|HS|CDMA|EVDO|WCDMA</string>
+    <string translatable="false" name="config_radio_access_family">GSM|WCDMA|CDMA|LTE|EVDO</string>
 
     <!-- Whether device supports double tap to wake -->
     <bool name="config_supportDoubleTapWake">true</bool>
