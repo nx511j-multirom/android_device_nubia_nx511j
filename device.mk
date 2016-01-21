@@ -147,6 +147,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libstlport
 
+#Snap Camera
+PRODUCT_PACKAGES += \
+    Snap
+
 PRODUCT_PACKAGES += \
     dtbToolNubia
 

@@ -131,6 +131,9 @@ voice.voip.conc.disabled=true
 #Enable deep_buffer
 audio.deep_buffer.media=true
 
+#Snap Camera
+persist.camera.cpp.duplication=false
+
 #Set read only default composition for USB
 ro.sys.usb.default.config=nubia
 
