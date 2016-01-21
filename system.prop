@@ -114,7 +114,6 @@ tunnel.audio.encode=false
 audio.offload.buffer.size.kb=64
 #Minimum duration for offload playback in secs
 audio.offload.min.duration.secs=30
-persist.factory.mic_number=13
 #Enable offload audio video playback by default
 av.offload.enable=true
 #enable voice path for PCM VoIP by default
@@ -128,6 +127,9 @@ audio.offload.gapless.enabled=true
 voice.playback.conc.disabled=true
 voice.record.conc.disabled=true
 voice.voip.conc.disabled=true
+
+#Enable deep_buffer
+audio.deep_buffer.media=true
 
 #Set read only default composition for USB
 ro.sys.usb.default.config=nubia
@@ -159,6 +161,9 @@ ro.sys.fw.bservice_enable=true
 ro.sys.fw.bservice_limit=5
 ro.sys.fw.bservice_age=5000
 
+# set max background services
+ro.config.max_starting_bg=8
+
 # Added by Song LinHua 2014.12.18 begin
 #      1 : restart system
 #      3 : restart the related subsystem only
@@ -168,9 +173,6 @@ persist.sys.ssr.restart_level=3
 #      1:  restart the system to download mode for dump
 persist.sys.ap.restart_level=0
 # Added by Song LinHua 2014.12.18 end
-
-#ZTEMT add for bootsound
-#sys.zte.bootsound.on=0
 
 # Add by ztemt for ZWfd begin
 #property to set wfd output resolution is 1080P(0) / 720P(1) / 960*540(2) / 800*480(3)
@@ -205,17 +207,8 @@ persist.radio.apm_sim_not_pwdn=1
 persist.radio.sib16_support=1
 ro.frp.pst=/dev/block/bootdevice/by-name/config
 drm.service.enabled=true
-persist.sys.power.sound=1
-persist.factory.receiver_volume=10
-persist.factory.loopback_volume=12
-#ro.build.camera.internal.id=V2.3.8.23
 audio.effect.name=srs
 audio.offload.disable=1
-#ro.build.audio.internal.id=V1.0.10
-persist.sys.singlehand=1
-persist.sys.lcd.anim.scale=0.0
-persist.sys.image.enhance=w
-persist.sys.image.colortmp=n
 persist.gps.qc_nlp_in_use=1
 persist.loc.nlp_name=com.qualcomm.location
 ro.gps.agps_provider=1
