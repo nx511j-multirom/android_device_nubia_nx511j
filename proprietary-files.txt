@@ -59,7 +59,7 @@ vendor/lib/libbtnv.so
 
 # Camera
 bin/mm-qcamera-daemon
-lib/hw/camera.msm8916.so:lib/hw/camera.vendor.msm8916.so
+lib/hw/camera.msm8916.so
 lib/libImageAlogrithm.so
 lib/libmmcamera_nubiacustpro.so
 #lib/libmorpho_image_converter.so
