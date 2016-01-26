@@ -327,11 +327,6 @@ PRODUCT_PACKAGES += \
     resize2fs \
     setup_fs
 
-# Qualcomm Random Numbers Generator
-PRODUCT_PACKAGES += \
-    qrngd \
-    qrngp 
-
 PRODUCT_PACKAGES += \
     libemoji \
     libion
