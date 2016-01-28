@@ -62,7 +62,6 @@ BOARD_RAMDISK_OFFSET := 0x02000000
 BOARD_KERNEL_SEPARATED_DT := true
 TARGET_USES_UNCOMPRESSED_KERNEL := true
 BOARD_DTBTOOL_ARGS := -2
-#BOARD_CUSTOM_BOOTIMG_MK := device/nubia/nx511j/mkbootimg.mk
 TARGET_KERNEL_CONFIG := cyanogenmod_nubia_nx511j_defconfig
 TARGET_KERNEL_SOURCE := kernel/nubia/nx511j
 
@@ -127,7 +126,7 @@ BOARD_USES_ALSA_AUDIO                      := true
 AUDIO_FEATURE_ENABLED_FM                   := true
 AUDIO_FEATURE_ENABLED_FLUENCE              := true
 AUDIO_FEATURE_LOW_LATENCY_PRIMARY          := true
-#USE_CUSTOM_AUDIO_POLICY := 1
+USE_CUSTOM_AUDIO_POLICY := 1
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH      := true
