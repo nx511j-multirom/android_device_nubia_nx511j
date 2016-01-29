@@ -169,8 +169,8 @@ on boot
     # Configure foreground and background cpuset
     write /dev/cpuset/foreground/cpus 0-7
     write /dev/cpuset/foreground/boost/cpus 4-7
-    write /dev/cpuset/background/cpus 0
-    write /dev/cpuset/system-background/cpus 0-3
+    write /dev/cpuset/background/cpus 4-7
+    write /dev/cpuset/system-background/cpus 4-7
 
 # msm specific files that need to be created on /data
 on post-fs-data
