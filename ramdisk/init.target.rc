@@ -87,6 +87,7 @@ service qseecomd /system/bin/qseecomd
    class core
    user root
    group root
+   writepid /dev/cpuset/system-background/tasks
 
 #service aostlmd /system/bin/aostlmd
 #   class late_start
@@ -106,11 +107,13 @@ service thermal-engine /system/bin/thermal-engine
    socket thermal-recv-client stream 0660 system system
    socket thermal-recv-passive-client stream 0666 system system
    group root
+   writepid /dev/cpuset/system-background/tasks
 
 service time_daemon /system/bin/time_daemon
    class late_start
    user root
    group root
+   writepid /dev/cpuset/system-background/tasks
 
 service audiod /system/bin/audiod
    class late_start
@@ -136,6 +139,7 @@ service wcnss-service /system/bin/wcnss_service
     user system
     group system wifi radio
     oneshot
+    writepid /dev/cpuset/system-background/tasks
 
 service imsqmidaemon /system/bin/imsqmidaemon
     class main

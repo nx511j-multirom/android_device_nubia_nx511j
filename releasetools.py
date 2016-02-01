@@ -36,6 +36,7 @@ image_partitions = {
    'hyp.mbn'           : 'hyp',
    'NON-HLOS.bin'      : 'modem',
    'sbl1.mbn'          : 'sbl1',
+   'splash.img'        : 'splash',
    'recovery-f2fs-m.img':'recovery'
 }
 

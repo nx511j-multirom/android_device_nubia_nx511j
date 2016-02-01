@@ -1162,6 +1162,7 @@ service power_engine /system/bin/power_engine
     group root
     class late_init
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
 #dynamic start cpu1-2
 on property:persist.sys.power_ctrl=1
@@ -1173,6 +1174,7 @@ on property:persist.sys.power_ctrl=0
 service akmd09911 /system/bin/akmd09911
     class main
     oneshot
+    writepid /dev/cpuset/system-background/tasks
 
 #TP related soft link added by ztemt 2014.12.09
 service tp_node /system/bin/sh /system/bin/tp_node.sh
