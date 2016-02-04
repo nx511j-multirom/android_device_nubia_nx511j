@@ -670,14 +670,25 @@ case "$target" in
                 # enable thermal core_control now
 		echo 1 > /sys/module/msm_thermal/core_control/enabled
 
+                if [ "$bootmode" != "charger" ]; then
                 # Bring up all cores online
-		echo 1 > /sys/devices/system/cpu/cpu1/online
-	        echo 1 > /sys/devices/system/cpu/cpu2/online
-	        echo 1 > /sys/devices/system/cpu/cpu3/online
-	        echo 1 > /sys/devices/system/cpu/cpu4/online
-                echo 1 > /sys/devices/system/cpu/cpu5/online
-                echo 1 > /sys/devices/system/cpu/cpu6/online
-                echo 1 > /sys/devices/system/cpu/cpu7/online
+                  echo 0 > /sys/devices/system/cpu/cpu1/online
+                  echo 0 > /sys/devices/system/cpu/cpu2/online
+                  echo 1 > /sys/devices/system/cpu/cpu3/online
+                  echo 1 > /sys/devices/system/cpu/cpu4/online
+                  echo 1 > /sys/devices/system/cpu/cpu5/online
+                  echo 1 > /sys/devices/system/cpu/cpu6/online
+                  echo 1 > /sys/devices/system/cpu/cpu7/online
+                else
+                  # Bring up all cores offline
+                  echo 0 > /sys/devices/system/cpu/cpu1/online
+                  echo 0 > /sys/devices/system/cpu/cpu2/online
+                  echo 0 > /sys/devices/system/cpu/cpu3/online
+                  echo 0 > /sys/devices/system/cpu/cpu4/online
+                  echo 0 > /sys/devices/system/cpu/cpu5/online
+                  echo 0 > /sys/devices/system/cpu/cpu6/online
+                  echo 0 > /sys/devices/system/cpu/cpu7/online
+                fi
 
 		# Enable low power modes
 		echo 0 > /sys/module/lpm_levels/parameters/sleep_disabled
@@ -777,25 +788,13 @@ case "$target" in
                 # enable thermal core_control now
                 echo 1 > /sys/module/msm_thermal/core_control/enabled
 
-                if [ "$bootmode" != "charger" ]; then
                 # Bring up all cores online
-                  echo 0 > /sys/devices/system/cpu/cpu1/online
-                  echo 0 > /sys/devices/system/cpu/cpu2/online
-                  echo 1 > /sys/devices/system/cpu/cpu3/online
-                  echo 1 > /sys/devices/system/cpu/cpu4/online
-                  echo 1 > /sys/devices/system/cpu/cpu5/online
-                  echo 1 > /sys/devices/system/cpu/cpu6/online
-                  echo 1 > /sys/devices/system/cpu/cpu7/online
-                else
-                  # Bring up all cores offline
-                  echo 0 > /sys/devices/system/cpu/cpu1/online
-                  echo 0 > /sys/devices/system/cpu/cpu2/online
-                  echo 0 > /sys/devices/system/cpu/cpu3/online
-                  echo 0 > /sys/devices/system/cpu/cpu4/online
-                  echo 0 > /sys/devices/system/cpu/cpu5/online
-                  echo 0 > /sys/devices/system/cpu/cpu6/online
-                  echo 0 > /sys/devices/system/cpu/cpu7/online
-                fi
+                echo 1 > /sys/devices/system/cpu/cpu1/online
+                echo 1 > /sys/devices/system/cpu/cpu2/online
+                echo 1 > /sys/devices/system/cpu/cpu3/online
+                echo 1 > /sys/devices/system/cpu/cpu5/online
+                echo 1 > /sys/devices/system/cpu/cpu6/online
+                echo 1 > /sys/devices/system/cpu/cpu7/online
 
 		# Enable low power modes
 		echo 0 > /sys/module/lpm_levels/parameters/sleep_disabled
