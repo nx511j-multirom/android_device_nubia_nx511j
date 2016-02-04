@@ -115,9 +115,12 @@ audio.offload.buffer.size.kb=64
 #Minimum duration for offload playback in secs
 audio.offload.min.duration.secs=30
 #Enable offload audio video playback by default
-av.offload.enable=true
+audio.offload.video=true
 #enable voice path for PCM VoIP by default
 use.voice.path.for.pcm.voip=true
+
+#Disable audio offload
+#audio.offload.disable=1
 
 #System property for FM transmitter
 ro.fm.transmitter=false
@@ -211,7 +214,6 @@ persist.radio.sib16_support=1
 ro.frp.pst=/dev/block/bootdevice/by-name/config
 drm.service.enabled=true
 audio.effect.name=srs
-audio.offload.disable=1
 persist.gps.qc_nlp_in_use=1
 persist.loc.nlp_name=com.qualcomm.location
 ro.gps.agps_provider=1
