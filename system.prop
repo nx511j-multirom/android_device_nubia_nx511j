@@ -132,7 +132,7 @@ voice.record.conc.disabled=true
 voice.voip.conc.disabled=true
 
 #Enable deep_buffer
-audio.deep_buffer.media=true
+#audio.deep_buffer.media=true
 
 #Snap Camera
 persist.camera.cpp.duplication=false

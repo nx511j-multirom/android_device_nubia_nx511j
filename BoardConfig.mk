@@ -125,7 +125,7 @@ BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 BOARD_USES_ALSA_AUDIO                      := true
 AUDIO_FEATURE_ENABLED_FM                   := true
 AUDIO_FEATURE_ENABLED_FLUENCE              := true
-#AUDIO_FEATURE_LOW_LATENCY_PRIMARY          := true
+AUDIO_FEATURE_LOW_LATENCY_PRIMARY          := true
 USE_CUSTOM_AUDIO_POLICY := 1
 
 # Bluetooth
@@ -147,7 +147,7 @@ TARGET_POWERHAL_VARIANT      := qcom
 
 # GPS
 TARGET_NO_RPC := true
-TARGET_GPS_HAL_PATH := $(LOCAL_PATH)/gps
+USE_DEVICE_SPECIFIC_GPS := true
 
 # LightHAL
 TARGET_PROVIDES_LIBLIGHT := true
