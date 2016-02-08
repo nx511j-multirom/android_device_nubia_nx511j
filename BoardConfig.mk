@@ -62,7 +62,6 @@ BOARD_RAMDISK_OFFSET := 0x02000000
 BOARD_KERNEL_SEPARATED_DT := true
 TARGET_USES_UNCOMPRESSED_KERNEL := true
 BOARD_DTBTOOL_ARGS := -2
-#BOARD_CUSTOM_BOOTIMG_MK := device/nubia/nx511j/mkbootimg.mk
 TARGET_KERNEL_CONFIG := cyanogenmod_nubia_nx511j_defconfig
 TARGET_KERNEL_SOURCE := kernel/nubia/nx511j
 
@@ -125,20 +124,9 @@ BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 # Audio
 BOARD_USES_ALSA_AUDIO                      := true
 AUDIO_FEATURE_ENABLED_FM                   := true
-#AUDIO_FEATURE_ENABLED_FLUENCE              := true
-AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
-#USE_CUSTOM_AUDIO_POLICY := 1
-
-# QCOM enhanced A/V
-TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
-
-# Camera
-USE_DEVICE_SPECIFIC_CAMERA := true
-# Force camera module to be compiled only in 32-bit mode on 64-bit systems
-# Once camera module can run in the native mode of the system (either
-# 32-bit or 64-bit), the following line should be deleted
-BOARD_QTI_CAMERA_32BIT_ONLY := true
-COMMON_GLOBAL_CFLAGS += -DCAMERA_VENDOR_L_COMPAT
+AUDIO_FEATURE_ENABLED_FLUENCE              := true
+AUDIO_FEATURE_LOW_LATENCY_PRIMARY          := true
+USE_CUSTOM_AUDIO_POLICY := 1
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH      := true
@@ -159,7 +147,7 @@ TARGET_POWERHAL_VARIANT      := qcom
 
 # GPS
 TARGET_NO_RPC := true
-TARGET_GPS_HAL_PATH := $(LOCAL_PATH)/gps
+USE_DEVICE_SPECIFIC_GPS := true
 
 # LightHAL
 TARGET_PROVIDES_LIBLIGHT := true
@@ -219,3 +207,7 @@ TARGET_TAP_TO_WAKE_NODE := "/data/tp/easy_wakeup_gesture"
 # Radio
 ADD_RADIO_FILES := true
 TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
+
+WITHOUT_HOST_CLANG := false
+WITH_DEXPREOPT := true
+WITH_DEXPREOPT_COMP := false

@@ -38,17 +38,6 @@ on init
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
-    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
-    mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
-    mkdir /mnt/media_rw/uicc0 0700 media_rw media_rw
-    mkdir /mnt/media_rw/uicc1 0700 media_rw media_rw
-    mkdir /storage/sdcard1 0700 root root
-    mkdir /storage/uicc0 0700 root root
-    mkdir /storage/uicc1 0700 root root
-    mkdir /storage/usbotg 0700 root root
-
-    export EXTERNAL_STORAGE /sdcard
-    export SECONDARY_STORAGE /storage/sdcard1
 
     #export LD_PRELOAD "libboringssl-compat.so"
     export LD_SHIM_LIBS "/system/lib/libcrypto.so|libboringssl-compat.so:/system/vendor/lib/libmmcamera2_sensor_modules.so|libcamera_symbol.so:/system/vendor/lib/libmmcamera2_stats_modules.so|libcamera_symbol.so:/system/lib64/libcrypto.so|libboringssl-compat.so:/system/vendor/lib64/egl/libEGL_adreno.so|libboringssl-compat.so:/system/bin/mm-qcamera-daemon|libcamera_symbol.so"
@@ -177,7 +166,7 @@ on boot
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
-    # Update foreground cpuset now that processors are up
+    # Configure foreground and background cpuset
     write /dev/cpuset/foreground/cpus 0-7
     write /dev/cpuset/foreground/boost/cpus 4-7
     write /dev/cpuset/background/cpus 4-7
@@ -506,7 +495,6 @@ on property:persist.sys.ssr.enable_ramdumps=0
 
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
-    start mem_shrinkd
 
 on property:persist.radio.atfwd.start=false
     stop atfwd
@@ -1174,19 +1162,13 @@ service power_engine /system/bin/power_engine
     group root
     class late_init
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
 #dynamic start cpu1-2
 on property:persist.sys.power_ctrl=1
     start power_engine
 on property:persist.sys.power_ctrl=0
     stop power_engine
-
-service mem_shrinkd /system/bin/sh /system/etc/memory_shrinkd.sh
-    class late_start
-    user root
-    disabled
-    oneshot
-
 
 #start the compass servie
 service akmd09911 /system/bin/akmd09911

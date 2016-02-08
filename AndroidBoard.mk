@@ -35,4 +35,5 @@ $(call add-radio-file,images/sbl1.mbn)
 $(call add-radio-file,images/tz.mbn)
 $(call add-radio-file,images/hyp.mbn)
 $(call add-radio-file,images/recovery-f2fs-m.img)
+$(call add-radio-file,images/splash.img)
 endif
