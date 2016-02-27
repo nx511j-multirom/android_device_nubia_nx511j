@@ -1,7 +1,7 @@
-From 3cf25402604af1c855eab76c8c5b91616865977f Mon Sep 17 00:00:00 2001
+From 7ab6df8dc0fc69a7cc7f4cf1c5b3f725adeefa22 Mon Sep 17 00:00:00 2001
 From: Chenxi Mao <chenxi.mao2013@gmail.com>
 Date: Sun, 20 Dec 2015 07:57:28 +0800
-Subject: [PATCH] Enable increatmental OTA
+Subject: [PATCH 1/1] Enable increatmental OTA
 
 Change-Id: I6772823d768b5f10eed76364116c30485d5881d3
 ---
@@ -12,7 +12,7 @@ Change-Id: I6772823d768b5f10eed76364116c30485d5881d3
  4 files changed, 22 insertions(+), 84 deletions(-)
 
 diff --git a/core/Makefile b/core/Makefile
-index 7eca2db..83078c7 100644
+index 34ff99c..0ecd517 100644
 --- a/core/Makefile
 +++ b/core/Makefile
 @@ -1092,11 +1092,11 @@ endif
@@ -47,10 +47,10 @@ index ca7e87f..86c36fb 100644
  
  define build-dtimage-target
 diff --git a/tools/releasetools/common.py b/tools/releasetools/common.py
-index 47cf759..034d77c 100644
+index cd35023..00ea7fe 100644
 --- a/tools/releasetools/common.py
 +++ b/tools/releasetools/common.py
-@@ -1415,75 +1415,4 @@ def ParseCertificate(data):
+@@ -1433,75 +1433,4 @@ def ParseCertificate(data):
  
  def MakeRecoveryPatch(input_dir, output_sink, recovery_img, boot_img,
                        info_dict=None):
@@ -120,15 +120,16 @@ index 47cf759..034d77c 100644
 -        m = re.match(r"^service flash_recovery /system/(\S+)\s*$", line)
 -        if m:
 -          sh_location = m.group(1)
--          print "putting script in", sh_location
+-          print("putting script in", sh_location)
 -          break
 -  except (OSError, IOError) as e:
--    print "failed to read init.rc: %s" % (e,)
+-    print("failed to read init.rc: %s" % e)
 -
 -  output_sink(sh_location, sh)
+\ No newline at end of file
 +  return
 diff --git a/tools/releasetools/edify_generator.py b/tools/releasetools/edify_generator.py
-index e3425bf..5445a0c 100644
+index 825a7eb..89a0c14 100644
 --- a/tools/releasetools/edify_generator.py
 +++ b/tools/releasetools/edify_generator.py
 @@ -84,15 +84,25 @@ class EdifyGenerator(object):
@@ -163,5 +164,5 @@ index e3425bf..5445a0c 100644
  
    def AssertSomeThumbprint(self, *fp):
 -- 
-2.6.4
+2.7.2
 
