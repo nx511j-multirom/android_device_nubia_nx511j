@@ -318,7 +318,7 @@
 
     <integer name="config_extraFreeKbytesAbsolute">30720</integer>
 
-    <integer name="config_lowMemoryKillerMinFreeKbytesAbsolute">163840</integer>
+    <integer name="config_lowMemoryKillerMinFreeKbytesAbsolute">204800</integer>
 
     <!-- Config determines whether to update phone object when voice registration
     state changes. Voice radio tech change will always trigger an update of
