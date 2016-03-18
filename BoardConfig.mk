@@ -173,10 +173,13 @@ TARGET_HAVE_SIGNED_VENUS_FW := true
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 
+# if build twrp use mokee tree, just remove '#'
+#RECOVERY_VARIANT := twrp
 # Recovery
 TARGET_RECOVERY_FSTAB := device/nubia/nx511j/ramdisk/fstab.qcom
 DEVICE_RESOLUTION := 1080x1920
 TARGET_RECOVERY_PIXEL_FORMAT := ABGR_8888
+#TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
