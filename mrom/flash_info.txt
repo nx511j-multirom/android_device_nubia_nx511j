@@ -1,0 +1,50 @@
+root@sn-WorkStation:/home/sn# gdisk -l /dev/sde
+GPT fdisk (gdisk) version 0.8.8
+
+Partition table scan:
+  MBR: protective
+  BSD: not present
+  APM: not present
+  GPT: present
+
+Found valid GPT with protective MBR; using GPT.
+Disk /dev/sde: 30785536 sectors, 14.7 GiB
+Logical sector size: 512 bytes
+Disk identifier (GUID): 98101B32-BBE2-4BF2-A06E-2BB33D000C20
+Partition table holds up to 32 entries
+First usable sector is 34, last usable sector is 30785502
+Partitions will be aligned on 2-sector boundaries
+Total free space is 699244 sectors (341.4 MiB)
+
+Number  Start (sector)    End (sector)  Size       Code  Name
+   1          131072          262143   64.0 MiB    0700  modem
+   2          262144          262207   32.0 KiB    FFFF  DDR
+   3          262208          265279   1.5 MiB     FFFF  fsg
+   4          265280          265311   16.0 KiB    FFFF  sec
+   5          393216          393217   1024 bytes  FFFF  fsc
+   6          393218          393233   8.0 KiB     FFFF  ssd
+   7          393234          394257   512.0 KiB   FFFF  sbl1
+   8          394258          395281   512.0 KiB   0700  sbl1bak
+   9          524288          526335   1024.0 KiB  FFFF  aboot
+  10          526336          528383   1024.0 KiB  0700  abootbak
+  11          655360          656383   512.0 KiB   FFFF  rpm
+  12          656384          657407   512.0 KiB   0700  rpmbak
+  13          657408          658431   512.0 KiB   FFFF  tz
+  14          658432          659455   512.0 KiB   0700  tzbak
+  15          659456          660479   512.0 KiB   FFFF  hyp
+  16          660480          661503   512.0 KiB   0700  hypbak
+  17          661504          664575   1.5 MiB     FFFF  modemst1
+  18          664576          667647   1.5 MiB     FFFF  modemst2
+  19          786432          851967   32.0 MiB    FFFF  boot
+  20          851968          917503   32.0 MiB    FFFF  recovery
+  21          917504          983039   32.0 MiB    FFFF  recovery2
+  22          983040         4128767   1.5 GiB     FFFF  system
+  23         4194304         4210687   8.0 MiB     FFFF  persist
+  24         4210688         4734975   256.0 MiB   FFFF  cache
+  25         4734976         4737023   1024.0 KiB  FFFF  misc
+  26         4737024         4738047   512.0 KiB   FFFF  keystore
+  27         4738048         4738111   32.0 KiB    FFFF  config
+  28         4738112         4869183   64.0 MiB    FFFF  oem
+  29         4869184         4889663   10.0 MiB    FFFF  splash
+  30         4889664        30785502   12.3 GiB    FFFF  userdata
+

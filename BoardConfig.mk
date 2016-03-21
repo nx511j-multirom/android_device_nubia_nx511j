@@ -1,5 +1,5 @@
 # Copyright (C) 2014 The Android Open Source Project
-#
+# Copyright (C) 2016 The MoKee Open Source Project
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -28,7 +28,9 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno405
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := msm8916
-TARGET_NO_BOOTLOADER := true
+#BOOTLOADER_GCC_VERSION := arm-eabi-4.8
+TARGET_GCC_VERSION := 4.8
+#TARGET_NO_BOOTLOADER := true
 
 # CPU
 TARGET_ARCH := arm64
@@ -57,7 +59,9 @@ TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 BOARD_KERNEL_CMDLINE := console=null androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_KERNEL_TAGS_OFFSET := 0x00000100
+#BOARD_KERNEL_TAGS_OFFSET := 0x00000100
+# dtb_base = 0xc0000000 , hack for nubia z9 mini(nx511j) -> kexec hardboot
+BOARD_KERNEL_TAGS_OFFSET := 0xc0000000
 BOARD_RAMDISK_OFFSET := 0x02000000
 BOARD_KERNEL_SEPARATED_DT := true
 TARGET_USES_UNCOMPRESSED_KERNEL := true
@@ -175,17 +179,16 @@ include device/qcom/sepolicy/sepolicy.mk
 
 # if build twrp use mokee tree, just remove '#'
 #RECOVERY_VARIANT := twrp
+#RECOVERY_VARIANT := multirom
 # Recovery
 TARGET_RECOVERY_FSTAB := device/nubia/nx511j/ramdisk/fstab.qcom
-DEVICE_RESOLUTION := 1080x1920
-TARGET_RECOVERY_PIXEL_FORMAT := ABGR_8888
-#TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
+TARGET_RECOVERY_PIXEL_FORMAT := RGBA_8888
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
 #twrp
-#TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/twrp/twrp.fstab
+DEVICE_RESOLUTION := 720x1280
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_SDCARD_ON_DATA := true
 TW_TARGET_USES_QCOM_BSP := true
@@ -199,6 +202,23 @@ TW_DEFAULT_EXTERNAL_STORAGE := true
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 
 BOARD_CANT_BUILD_RECOVERY_FROM_BOOT_PATCH := true
+
+#MultiROM config. MultiROM also uses parts of TWRP config
+TARGET_RECOVERY_IS_MULTIROM := true
+MR_INPUT_TYPE := type_a
+MR_INIT_DEVICES := device/nubia/nx511j/mrom/mr_init_devices.c
+#MR_RD_ADDR := 0x82500000
+MR_DPI := hdpi
+MR_DPI_MUL := 1
+MR_DPI_FONT := 216
+MR_KEXEC_DTB := true
+#MR_PIXEL_FORMAT := "RGBA_8888"
+MR_PIXEL_FORMAT := "RGB_565"
+MR_FSTAB := device/nubia/nx511j/recovery/root/etc/twrp.fstab
+MR_USE_MROM_FSTAB := true
+MR_KEXEC_MEM_MIN := 0x85000000
+MR_INFOS := device/nubia/nx511j/mrom/mrom_infos
+TW_USE_TOOLBOX := false
 
 # RIL class
 BOARD_RIL_CLASS := ../../../device/nubia/nx511j/ril/
