@@ -25,10 +25,7 @@ const char *mr_init_devices[] =
 	"/sys/block/mmcblk0",
 	"/sys/bus/mmc",
 	"/sys/bus/mmc/drivers/mmcblk",
-
-	//"/sys/bus/sdio/drivers/bcmsdh_sdmmc",
 	"/sys/devices/platform/msm_hotplug/driver",
-	//"/sys/devices/platform/msm_sdcc.1*",
 	"/sys/module/mmcblk",
 	"/sys/module/mmc_core",
 	"/sys/devices/soc.0/7824900.sdhci/mmc_host/mmc0",
@@ -47,9 +44,6 @@ const char *mr_init_devices[] =
 	"/sys/devices/soc.0/7824900.sdhci/mmc_host/mmc0//mmc0:0001/block/mmcblk0/mmcblk0p15", // hyp
 	"/sys/devices/soc.0/7824900.sdhci/mmc_host/mmc0//mmc0:0001/block/mmcblk0/mmcblk0p25", // misc 
 	
-	// MicroSD card
-	//"/sys/block/mmcblk1",
-	//"/sys/devices/platform/msm_sdcc.2*",
 
 	// Input stuff
     	"/sys/class/misc/uinput",
@@ -65,13 +59,6 @@ const char *mr_init_devices[] =
 	"/sys/devices/soc.0/gpio_keys.66/input",
 	"/sys/devices/soc.0/gpio_keys.66/input/input7",   // Volume keys
 	"/sys/devices/soc.0/gpio_keys.66/input/input7/event7",
-//	"/sys/devices/soc.0/gpio_keys.66/input/input7",// Volume keys
-
-	//"/sys/devices/i2c-3/3-0020/input/input3*", // Touchscreen
-	//"/sys/devices/platform/gpio-keys/input*", // Volume keys
-
-	//"/sys/bus/platform/drivers/gpio-keys",
-	"/sys/bus/platform/drivers/gpio-keys/gpio_keys.66/input",
 /*
 evtest /dev/input/event6                                                                                       
 Input driver version is 1.0.1

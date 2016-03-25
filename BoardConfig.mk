@@ -205,27 +205,18 @@ BOARD_CANT_BUILD_RECOVERY_FROM_BOOT_PATCH := true
 
 #MultiROM config. MultiROM also uses parts of TWRP config
 TARGET_RECOVERY_IS_MULTIROM := true
-MR_INPUT_TYPE := type_b
+MR_INPUT_TYPE := type_a
 MR_INIT_DEVICES := device/nubia/nx511j/mrom/mr_init_devices.c
 #MR_RD_ADDR := 0x82500000
 MR_DPI := xhdpi
 MR_DPI_MUL := 1.5
 MR_DPI_FONT := 340
 MR_KEXEC_DTB := true
-# rgba_8888 is the twrp origin framebuffer format
-#MR_PIXEL_FORMAT := "RGBA_8888"
-#MR_PIXEL_FORMAT := "BGRA_8888"
-#MR_PIXEL_FORMAT := "RGBX_8888"
-
 # only RGB_565 work 
 MR_PIXEL_FORMAT := "RGB_565"
 
-#MR_USE_QCOM_OVERLAY := true
-#MR_QCOM_OVERLAY_HEADER := device/nubia/nx511j/mrom/mr_qcom_overlay.h
-#MR_QCOM_OVERLAY_CUSTOM_PIXEL_FORMAT := MDP_BGRA_8888
-
-MR_DISABLE_ALPHA := true
-R_CONTINUOUS_FB_UPDATE := true
+#MR_DISABLE_ALPHA := true
+#MR_CONTINUOUS_FB_UPDATE := true
 
 MR_FSTAB := device/nubia/nx511j/recovery/root/etc/twrp.fstab
 MR_USE_MROM_FSTAB := true
