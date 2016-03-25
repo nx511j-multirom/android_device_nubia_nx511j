@@ -11,11 +11,15 @@ const char *mr_init_devices[] =
 	"/sys/class/graphics/fb0",
 
 	// ADB stuff
+	//------------------adb not working ------------//
 	"/sys/bus/usb",
 	"/sys/class/android_usb/android0/f_adb",
 	"/sys/class/misc/android_adb",
 	"/dev/usb-ffs/adb",
+	//------------------------------------//
 	"/sys/class/tty/ptmx",
+	"/sys/devices/virtual/tty/tty",
+	"/sys/devices/virtual/tty/ptmx",
 	
 	// EMMC stuff
 	"/sys/block/mmcblk0",
@@ -50,58 +54,60 @@ const char *mr_init_devices[] =
 	// Input stuff
     	"/sys/class/misc/uinput",
 	"/sys/devices/virtual/misc/uinput",
-	"/sys/class/input*",
+	//"/sys/class/input*",
 
 	// Input stuff
 
 	"/sys/devices/soc.0/78b6000.i2c/i2c-0/0-006a/input",// Touchscreen
-	"/sys/devices/soc.0/78b6000.i2c/i2c-0/0-006a/input/input0*",// Touchscreen
+	"/sys/devices/soc.0/78b6000.i2c/i2c-0/0-006a/input/input0",
+	"/sys/devices/soc.0/78b6000.i2c/i2c-0/0-006a/input/input0/event0",
 	
-	"/sys/devices/soc.0/gpio_keys.66/input/input7",// Volume keys
+	"/sys/devices/soc.0/gpio_keys.66/input",
+	"/sys/devices/soc.0/gpio_keys.66/input/input7",   // Volume keys
+	"/sys/devices/soc.0/gpio_keys.66/input/input7/event7",
+//	"/sys/devices/soc.0/gpio_keys.66/input/input7",// Volume keys
 
 	//"/sys/devices/i2c-3/3-0020/input/input3*", // Touchscreen
-	"/sys/devices/platform/gpio-keys/input*", // Volume keys
-
-	/*
-	"/sys/devices/soc.0/gpio_keys.66",
-
-	"/sys/devices/soc.0/gpio_keys.66/input/input7",// Volume keys
-
-	//"/sys/devices/i2c-3/3-0020/input/input3*", // Touchscreen
-	"/sys/devices/platform/gpio-keys/input*", // Volume keys
-	*/
-	//"/sys/devices/platform/msm_ssbi.0/pm8921-core/pm8xxx-pwrkey/input*", // Power key
+	//"/sys/devices/platform/gpio-keys/input*", // Volume keys
 
 	//"/sys/bus/platform/drivers/gpio-keys",
-	"/sys/bus/platform/drivers/gpio-keys/gpio_keys.66/input*",
-	/*
-	"/sys/bus/spmi/drivers/qcom,qpnp-vibrator",
-	"/sys/bus/spmi/drivers/qcom,qpnp-vadc",
-	"/sys/bus/spmi/drivers/qcom,leds-qpnp",
-	"/sys/bus/spmi/drivers/qcom,qpnp-power-on",
-	"/sys/bus/spmi/drivers/qcom,qpnp-pin",
-	"/sys/bus/spmi/devices/qpnp-vadc-ffffffc0743a3400",
-	"/sys/bus/spmi/devices/qpnp-pin-ffffffc0743a2800",
-	"/sys/bus/spmi/devices/qpnp-pin-ffffffc0743a2c00",
-	"/sys/bus/spmi/devices/qpnp-pwm-ffffffc0743a5000",
+	"/sys/bus/platform/drivers/gpio-keys/gpio_keys.66/input",
+/*
+evtest /dev/input/event6                                                                                       
+Input driver version is 1.0.1
+Input device ID: bus 0x0 vendor 0x0 product 0x0 version 0x0
+Input device name: "qpnp_pon"
+Supported events:
+  Event type 0 (Reset)
+    Event code 0 (Reset)
+    Event code 1 (Key)
+  Event type 1 (Key)
+    Event code 116 (Power)
+*/
+	"/sys/devices/virtual/input",
+	"/sys/devices/virtual/input/input6", 
+	"/sys/devices/virtual/input/input6/event6", 
+	
 
+/*
+evtest /dev/input/event8
 
-	"/sys/devices/soc.0/leds-qpnp-ffffffc0743a4800",
-	"/sys/devices/soc.0/qpnp-pin-ffffffc0743a2c00",
-	"/sys/devices/soc.0/qpnp-pin-ffffffc0743a2800",
-	"/sys/devices/soc.0/qpnp-power-on-ffffffc0743a2400",
-	"/sys/devices/soc.0/qpnp-vadc-ffffffc0743a3400",
-	"/sys/devices/soc.0/leds-qpnp-ffffffc0743a4800",
-	"/sys/devices/soc.0/qpnp-vibrator-ffffffc0743a5400",
-	"/sys/devices/soc.0/qpnp-linear-charger-ffffffc0743a4000",
-	"/sys/bus/spmi/drivers/qcom,qpnp-vadc",
-	*/
+    Event code 63 (F5)
+    Event code 64 (F6)
+    Event code 65 (F7)
+    Event code 66 (F8)
+    Event code 67 (F9)
+    Event code 116 (Power)
+    Event code 139 (Menu)
+    Event code 158 (Back)
+    Event code 172 (HomePage)
+    Event code 330 (Touch)
 
-	//virtual
-	//"/sys/devices/virtual/tty*",
-	"/sys/devices/virtual/tty/tty",
-	"/sys/devices/virtual/tty/ptmx",
-	//"/sys/devices/virtual/input*",
+*/
+	"/sys/devices/virtual/input",
+	"/sys/devices/virtual/input/input8", // Touch Screen
+	"/sys/devices/virtual/input/input8/event8",
+
 
  	NULL
 };
