@@ -51,44 +51,51 @@ const char *mr_init_devices[] =
     	"/sys/class/misc/uinput",
 	"/sys/devices/virtual/misc/uinput",
 	"/sys/class/input*",
-	//"/dev/input*",
-	
-	"/sys/devices/soc.0/78b6000.i2c/i2c-0/0-006a/input/input0*",// Touchscreen
-	"/sys/bus/platform/drivers/gpio-keys",
-	"/sys/devices/soc.0/gpio_keys.66",
-	"/sys/devices/soc.0/gpio_keys.66/input/input7",
-	//"/sys/devices/soc.0/gpio_keys.66/input/input7*",// Volume keys
-	"/sys/devices/soc.0/78b6000.i2c/i2c-0/0-006a/input",
-	"/sys/devices/soc.0/78b6000.i2c/i2c-0/0-006a/input*",
 
+	// Input stuff
+
+	"/sys/devices/soc.0/78b6000.i2c/i2c-0/0-006a/input",// Touchscreen
+	"/sys/devices/soc.0/78b6000.i2c/i2c-0/0-006a/input/input0*",// Touchscreen
+	
+	"/sys/devices/soc.0/gpio_keys.66/input/input7",// Volume keys
 
 	//"/sys/devices/i2c-3/3-0020/input/input3*", // Touchscreen
-	//"/sys/devices/platform/gpio-keys/input", // Volume keys
+	"/sys/devices/platform/gpio-keys/input*", // Volume keys
 
+	/*
+	"/sys/devices/soc.0/gpio_keys.66",
+
+	"/sys/devices/soc.0/gpio_keys.66/input/input7",// Volume keys
+
+	//"/sys/devices/i2c-3/3-0020/input/input3*", // Touchscreen
+	"/sys/devices/platform/gpio-keys/input*", // Volume keys
+	*/
 	//"/sys/devices/platform/msm_ssbi.0/pm8921-core/pm8xxx-pwrkey/input*", // Power key
-	"/sys/devices/soc.0/78b6000.i2c/i2c-0/0-006a/input/input0",  //lsm6ds0_acc
-	"/sys/devices/soc.0/78b6000.i2c/i2c-0/0-006a/input/input1",  //lsm6ds0_gyr
-	"/sys/devices/soc.0/gpio_keys.66/input/input7", // gpio-keys 
-	"/sys/devices/virtual/input/input8",            // goodix-ts 
-	"/sys/devices/virtual/input/input4",            //light 
-	"/sys/devices/virtual/input/input6", 	 	// qpnp_pon
+
+	//"/sys/bus/platform/drivers/gpio-keys",
+	"/sys/bus/platform/drivers/gpio-keys/gpio_keys.66/input*",
+	/*
+	"/sys/bus/spmi/drivers/qcom,qpnp-vibrator",
+	"/sys/bus/spmi/drivers/qcom,qpnp-vadc",
+	"/sys/bus/spmi/drivers/qcom,leds-qpnp",
+	"/sys/bus/spmi/drivers/qcom,qpnp-power-on",
+	"/sys/bus/spmi/drivers/qcom,qpnp-pin",
+	"/sys/bus/spmi/devices/qpnp-vadc-ffffffc0743a3400",
+	"/sys/bus/spmi/devices/qpnp-pin-ffffffc0743a2800",
+	"/sys/bus/spmi/devices/qpnp-pin-ffffffc0743a2c00",
+	"/sys/bus/spmi/devices/qpnp-pwm-ffffffc0743a5000",
 
 
-	"/sys/devices/soc.0/78b6000.i2c/i2c-0/i2c-dev/i2c-0",
-	"/sys/devices/soc.0/qcom,smp2pgpio-smp2p-1-in.47",
-	"/sys/devices/soc.0/1000000.pinctrl/gpio/gpiochip902",
-	"/sys/devices/soc.0/qcom,smp2pgpio-smp2p-7-out.45/gpio/gpiochip835",
-	"/sys/devices/soc.0/qcom,smp2pgpio-ssr-smp2p-1-out.52/gpio/gpiochip643",
-	"/sys/devices/soc.0/qcom,smp2pgpio-smp2p-4-in.53/gpio/gpiochip739",
-
-	// Ramoops 
-	"/sys/devices/platform/ramoops",
-
-    	// Logging
-   	//"/sys/devices/virtual/pmsg/pmsg0",
-
-	// USB-OTG
-	//"/sys/devices/platform/msm_hsusb_host*",
+	"/sys/devices/soc.0/leds-qpnp-ffffffc0743a4800",
+	"/sys/devices/soc.0/qpnp-pin-ffffffc0743a2c00",
+	"/sys/devices/soc.0/qpnp-pin-ffffffc0743a2800",
+	"/sys/devices/soc.0/qpnp-power-on-ffffffc0743a2400",
+	"/sys/devices/soc.0/qpnp-vadc-ffffffc0743a3400",
+	"/sys/devices/soc.0/leds-qpnp-ffffffc0743a4800",
+	"/sys/devices/soc.0/qpnp-vibrator-ffffffc0743a5400",
+	"/sys/devices/soc.0/qpnp-linear-charger-ffffffc0743a4000",
+	"/sys/bus/spmi/drivers/qcom,qpnp-vadc",
+	*/
 
 	//virtual
 	//"/sys/devices/virtual/tty*",
